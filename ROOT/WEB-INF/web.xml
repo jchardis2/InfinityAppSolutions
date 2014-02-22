@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0">
 
-	<!-- <servlet> -->
-	<!-- <servlet-name>default</servlet-name> -->
-	<!-- <servlet-class>org.eclipse.jetty.servlet.DefaultServlet -->
-	<!-- </servlet-class> -->
-	<!-- <init-param> -->
-	<!-- <param-name>dirAllowed</param-name> -->
-	<!-- <param-value>false</param-value> -->
-	<!-- </init-param> -->
-	<!-- </servlet> -->
+	<servlet>
+		<servlet-name>default</servlet-name>
+		<servlet-class>org.eclipse.jetty.servlet.DefaultServlet
+		</servlet-class>
+		<init-param>
+			<param-name>dirAllowed</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</servlet>
 
 	<!-- jsf -->
 	<!-- Change to "Production" when you are ready to deploy -->
@@ -66,13 +66,19 @@
 			</Arg>
 		</New>
 	</Configure>
-
-	<Call name="addRule">
-		<Arg>
-			<New class="org.eclipse.jetty.rewrite.handler.RewritePatternRule">
-				<Set name="pattern">/*</Set>
-				<Set name="replacement">/WebContent</Set>
-			</New>
-		</Arg>
-	</Call>
+	<New class="org.eclipse.jetty.jaas.JAASLoginService">
+		<Set name="Name">Test JAAS Realm</Set>
+		<Set name="LoginModuleName">jdbc</Set>
+		<Set name="RoleCheckPolicy">
+			<New class="org.eclipse.jetty.jaas.StrictRoleCheckPolicy" />
+		</Set>
+		<Set name="CallbackHandlerClass">
+			org.eclipse.jetty.jaas.callback.DefaultCallbackHandler
+		</Set>
+		<Set name="roleClassNames">
+			<Array type="java.lang.String">
+				<Item>org.eclipse.jetty.jaas.JAASRole</Item>
+			</Array>
+		</Set>
+	</New>
 </web-app>

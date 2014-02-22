@@ -12,41 +12,25 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand " href="/webdesigner/user/home.xhtml">Web
-					Designer</a>
+				<a class="navbar-brand " href="/user/home.xhtml">Web Designer</a>
 			</div>
 
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="/webdesigner/user/projects.xhtml">Projects</a></li>
-					<li><a href="/webdesigner/user/designer.xhtml">Designer
-							JSf</a></li>
-					<li><a href="/webdesigner/user/designer.jsp">Designer JSP</a></li>
-					<li><a href="/webdesigner/user/plugins.xhtml">Plugins</a></li>
+					<li><a href="/user/projects.xhtml">Projects</a></li>
+					<li><a href="/user/designer.xhtml">Designer JSf</a></li>
+					<li><a href="/user/designer.jsp">Designer JSP</a></li>
+					<li><a href="/user/plugins.xhtml">Plugins</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Organizations <b class="caret"></b></a>
-
 						<ul class="dropdown-menu">
-
-							<h:form id="orgForm" prependId="false">
-								<ui:repeat var="oub"
-									value="#{generateOrgUserBeanView.orgUsersBeansList}"
-									varStatus="status">
-									<li><p:remoteCommand name="lazyload">
-											<f:setPropertyActionListener for="#{oub.name}"
-												target="#{loggedInUsersOrgContainerBean.currentOrgUsersBean}"
-												value="#{oub}" />
-										</p:remoteCommand></li>
-									<li><a id="#{oub.name}" class="active"
-										href="/user/home.xhtml" onclick="lazyload()"
-										style="display: block; padding: 3px 20px; clear: both; font-weight: normal; line-height: 1.428571429; color: #333; white-space: nowrap; background: transparent; cursor: auto;">#{oub.name}</a></li>
-								</ui:repeat>
-							</h:form>
+							<li><a class="active" href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
 							<li class="divider"></li>
-							<li><a class="active" href="/user/createOrg.xhtml">Create
-									Organization</a></li>
+							<li><a href="#">Create Organization</a></li>
 						</ul></li>
 				</ul>
 				<h:form styleClass="navbar-form navbar-right">

@@ -1,5 +1,6 @@
 package com.infinityappsolutions.webdesigner.views;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
@@ -13,7 +14,8 @@ import com.infinityappsolutions.webdesigner.faces.FacesProvider;
 
 @ViewScoped
 @ManagedBean(name = "generateOrgUserBeanView")
-public class GenerateOrgUserBeanView {
+public class GenerateOrgUserBeanView implements Serializable {
+	private static final long serialVersionUID = 2919808856672964908L;
 	private ArrayList<OrgUserBean> orgUsersBeansList;
 
 	public GenerateOrgUserBeanView() {
@@ -23,7 +25,8 @@ public class GenerateOrgUserBeanView {
 	public ArrayList<OrgUserBean> generateOrgUsersBean() {
 		GenerateOrgUserBeanAction action = new GenerateOrgUserBeanAction();
 		try {
-			orgUsersBeansList = action.generateOrgUsersBean(FacesProvider.getInstance().getLoggedInUserBean().getId());
+			orgUsersBeansList = action.generateOrgUsersBean(FacesProvider
+					.getInstance().getLoggedInUserBean().getId());
 			return orgUsersBeansList;
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
