@@ -24,7 +24,7 @@
 		<link>
 			<name>webdesigner.xml</name>
 			<type>1</type>
-			<locationURI>/home/jchardis/git/InfinityAppSolutions/webdesigner.xml</locationURI>
+			<location>/home/jchardis/git/InfinityAppSolutions/webdesigner.xml</location>
 		</link>
 	</linkedResources>
 </projectDescription>
