@@ -1,14 +1,17 @@
 package com.infinityappsolutions.server;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.management.ManagementFactory;
+import java.util.Properties;
 
 import org.eclipse.jetty.deploy.DeploymentManager;
 import org.eclipse.jetty.deploy.PropertiesConfigurationManager;
 import org.eclipse.jetty.deploy.providers.WebAppProvider;
 import org.eclipse.jetty.jaas.JAASLoginService;
 import org.eclipse.jetty.jmx.MBeanContainer;
-import org.eclipse.jetty.security.HashLoginService;
-import org.eclipse.jetty.security.JDBCLoginService;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -28,21 +31,12 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.util.thread.ScheduledExecutorScheduler;
 
 public class Main {
+	private static String jetty_home;
+	private static String webbapp_home;
+	private static String jetty_base;
 
 	public static void main(String[] args) throws Exception {
-		// /home/jchardis/ds/WebAppWorkSpace
-		System.setProperty("java.security.auth.login.config",
-				"/home/jchardis/git/InfinityAppSolutions/JettyServer/etc/login.conf");
-		String jetty_home = System.getProperty("jetty.home",
-				"/home/jchardis/ds/Jetty/jetty-distribution-9.1.2.v20140210");
-
-		String webbapp_home = System.getProperty("webapp.home",
-				"/home/jchardis/git/InfinityAppSolutions");
-		String jetty_base = System
-				.getProperty("jetty.home",
-						"/home/jchardis/ds/Jetty/jetty-distribution-9.1.2.v20140210/demo-base");
-		System.setProperty("jetty.home", jetty_home);
-		System.setProperty("jetty.base", jetty_base);
+		loadSystemProperties();
 		QueuedThreadPool threadPool = new QueuedThreadPool();
 		threadPool.setMaxThreads(500);
 		Server server = new Server(threadPool);
@@ -83,7 +77,7 @@ public class Main {
 				"SSL_RSA_EXPORT_WITH_RC4_40_MD5",
 				"SSL_RSA_EXPORT_WITH_DES40_CBC_SHA",
 				"SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA",
-				"SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA"); 
+				"SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA");
 		HttpConfiguration https_config = new HttpConfiguration(http_config);
 		https_config.addCustomizer(new SecureRequestCustomizer());
 		ServerConnector sslConnector = new ServerConnector(server,
@@ -137,5 +131,17 @@ public class Main {
 		server.addBean(jaasLoginService);
 		server.start();
 		server.join();
+	}
+
+	public static void loadSystemProperties() throws IOException {
+		FileInputStream propFile = new FileInputStream("config.properties");
+		Properties p = new Properties(System.getProperties());
+		p.load(propFile);
+		System.setProperties(p);
+		jetty_home = System.getProperty("jetty.home", null);
+
+		webbapp_home = System.getProperty("webapp.home", null);
+		jetty_base = System.getProperty("jetty.home", null);
+
 	}
 }
