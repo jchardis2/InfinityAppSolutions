@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0">
+
+	<!-- <servlet> -->
+	<!-- <servlet-name>default</servlet-name> -->
+	<!-- <servlet-class>org.eclipse.jetty.servlet.DefaultServlet -->
+	<!-- </servlet-class> -->
+	<!-- <init-param> -->
+	<!-- <param-name>dirAllowed</param-name> -->
+	<!-- <param-value>false</param-value> -->
+	<!-- </init-param> -->
+	<!-- </servlet> -->
+
+	<!-- jsf -->
+	<!-- Change to "Production" when you are ready to deploy -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<!-- JSF mapping -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<listener-class>
+			com.sun.faces.config.ConfigureListener
+		</listener-class>
+	</listener>
+	<!-- end jsf -->
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+		<Set name="contextPath">/tst</Set>
+		<Set name="war">/WebContent</Set>
+		<New id="myds" class="org.eclipse.jetty.plus.jndi.Resource">
+			<Arg>
+				<Ref refid="wac" />
+			</Arg>
+			<Arg>jdbc/myds</Arg>
+			<Arg>
+				<New class="com.mysql.jdbc.Driver">
+					<Set name="DatabaseName">infinityappsolutions</Set>
+					<Set name="createDatabase">create</Set>
+				</New>
+			</Arg>
+		</New>
+	</Configure>
+
+	<Call name="addRule">
+		<Arg>
+			<New class="org.eclipse.jetty.rewrite.handler.RewritePatternRule">
+				<Set name="pattern">/*</Set>
+				<Set name="replacement">/WebContent</Set>
+			</New>
+		</Arg>
+	</Call>
+</web-app>

@@ -1,0 +1,1 @@
+INSERT INTO `webdesigner`.`user_role` (`user_username`, `role_name`) VALUES ('jchardis', 'user');
