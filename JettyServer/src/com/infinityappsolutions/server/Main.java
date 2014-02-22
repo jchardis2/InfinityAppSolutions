@@ -126,9 +126,9 @@ public class Main {
 		// login.setName("Test Realm");
 		// login.setConfig(jetty_base + "/etc/realm.properties");
 		// login.setRefreshInterval(0);
-		JAASLoginService jaasLoginService = new JAASLoginService("JAASRealm");
-		jaasLoginService.setLoginModuleName("jdbc");
-		server.addBean(jaasLoginService);
+//		JAASLoginService jaasLoginService = new JAASLoginService("JAASRealm");
+//		jaasLoginService.setLoginModuleName("jdbc");
+//		server.addBean(jaasLoginService);
 		server.start();
 		server.join();
 	}

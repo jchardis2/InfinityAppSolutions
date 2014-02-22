@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ROOT</name>
+	<name>InfinityAppSolutionsServer</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -20,4 +20,11 @@
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>ROOT.xml</name>
+			<type>1</type>
+			<location>/home/jchardis/git/InfinityAppSolutions/ROOT.xml</location>
+		</link>
+	</linkedResources>
 </projectDescription>

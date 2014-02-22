@@ -44,10 +44,12 @@ public class LoginAction {
 	 *             validation of the provided username and password fails
 	 * @throws DBException
 	 */
-	public void login(String username, String password, HttpServletRequest request) throws ServletException, DBException {
+	public void login(String username, String password,
+			HttpServletRequest request) throws ServletException, DBException {
 		request.login(username, password);
 		UserDAO userDAO = new UserDAO(DAOFactory.getProductionInstance());
-		LoggedInUserBean loggedInUserBean = FacesProvider.getInstance().getLoggedInUserBean();
+		LoggedInUserBean loggedInUserBean = FacesProvider.getInstance()
+				.getLoggedInUserBean();
 		userDAO.getUserByCredentials(username, password, loggedInUserBean);
 	}
 
