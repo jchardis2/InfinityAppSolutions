@@ -14,7 +14,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import com.infinityappsolutions.server.login.WebDesignerLoginAuthenticator;
+import com.infinityappsolutions.server.lib.login.IASLoginAuthenticator;
 
 public class Main2 {
 
@@ -69,7 +69,7 @@ public class Main2 {
 		constraintMappingsList.add(mappingAdmins);
 		constraintMappingsList.add(mappingNoUser);
 
-		WebDesignerLoginAuthenticator authenticator = new WebDesignerLoginAuthenticator(
+		IASLoginAuthenticator authenticator = new IASLoginAuthenticator(
 				"/login.xhtml", "/login-error.xhtml", false);
 		authenticator.setAlwaysSaveUri(true);
 
@@ -104,7 +104,7 @@ public class Main2 {
 
 	public static ConstraintSecurityHandler getSecurityHandler(
 			ArrayList<ConstraintMapping> constraintMappingsList,
-			WebDesignerLoginAuthenticator authenticator,
+			IASLoginAuthenticator  authenticator,
 			JAASLoginService jaasLoginService) {
 		ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
 		securityHandler.setConstraintMappings(Collections

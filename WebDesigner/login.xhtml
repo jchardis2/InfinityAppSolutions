@@ -28,7 +28,8 @@
 			<h1>​Web Designer</h1>
 			​
 			<h:form prependId="false">
-				<h:panelGrid columns="2" cellpadding="5">
+				<p:focus context="panel" />
+				<h:panelGrid id="panel" columns="2" cellpadding="5">
 					<h:outputLabel for="wd_username" value="Username:" />
 					<p:inputText value="#{loginView.username}" id="wd_username"
 						required="true" label="username" />
