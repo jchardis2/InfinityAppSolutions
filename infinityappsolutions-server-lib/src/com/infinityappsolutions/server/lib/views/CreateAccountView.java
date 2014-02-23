@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.views;
+package com.infinityappsolutions.server.lib.views;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -7,11 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import com.infinityappsolutions.server.actions.CreateAccountAction;
+import com.infinityappsolutions.server.lib.actions.IASRootCreateAccountAction;
 import com.infinityappsolutions.server.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.log.Logger;
-import com.infinityappsolutions.server.security.SecureHashUtil;
+import com.infinityappsolutions.server.lib.log.Logger;
+import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
 @ViewScoped
 @ManagedBean(name = "createAccountView")
@@ -31,7 +31,7 @@ public class CreateAccountView extends UserBean {
 		SecureHashUtil hashUtil = new SecureHashUtil();
 		try {
 			password = hashUtil.sha256Hash((String) password);
-			CreateAccountAction accountAction = new CreateAccountAction();
+			IASRootCreateAccountAction accountAction = new IASRootCreateAccountAction();
 			accountAction.createAccount(this);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block

@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.login;
+package com.infinityappsolutions.server.lib.login;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import org.eclipse.jetty.jaas.callback.RequestParameterCallback;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.util.security.Password;
 
-public class WebDesignerLoginCallbackHandler extends DefaultCallbackHandler {
+public class IASLoginCallbackHandler extends DefaultCallbackHandler {
 
 	private Request _request;
 

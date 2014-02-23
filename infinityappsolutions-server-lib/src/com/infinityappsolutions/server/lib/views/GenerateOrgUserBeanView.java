@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.views;
+package com.infinityappsolutions.server.lib.views;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.infinityappsolutions.server.actions.ui.GenerateOrgUserBeanAction;
-import com.infinityappsolutions.server.faces.FacesProvider;
+import com.infinityappsolutions.lib.server.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
+import com.infinityappsolutions.server.lib.ui.actions.GenerateOrgUserBeanAction;
 
 @ViewScoped
 @ManagedBean(name = "generateOrgUserBeanView")
@@ -25,8 +25,9 @@ public class GenerateOrgUserBeanView implements Serializable {
 	public ArrayList<OrgUserBean> generateOrgUsersBean() {
 		GenerateOrgUserBeanAction action = new GenerateOrgUserBeanAction();
 		try {
-			orgUsersBeansList = action.generateOrgUsersBean(FacesProvider
-					.getInstance().getLoggedInUserBean().getId());
+			orgUsersBeansList = action
+					.generateOrgUsersBean(IASRootFacesProvider.getInstance()
+							.getLoggedInUserBean().getId());
 			return orgUsersBeansList;
 		} catch (DBException e) {
 			// TODO Auto-generated catch block

@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.views;
+package com.infinityappsolutions.server.lib.views;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -11,9 +11,9 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.infinityappsolutions.server.actions.LoginAction;
+import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.security.SecureHashUtil;
+import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
 @ViewScoped
 @ManagedBean(name = "loginView")
@@ -61,7 +61,7 @@ public class LoginView implements Serializable {
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-		LoginAction action = new LoginAction();
+		IASRootLoginAction action = new IASRootLoginAction();
 		try {
 			SecureHashUtil hashUtil = new SecureHashUtil();
 			password = hashUtil.sha256Hash((String) password);
@@ -102,7 +102,7 @@ public class LoginView implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		try {
-			LoginAction action = new LoginAction();
+			IASRootLoginAction action = new IASRootLoginAction();
 			action.logout(request);
 			context.getExternalContext().redirect("/login.xhtml");
 		} catch (ServletException e) {

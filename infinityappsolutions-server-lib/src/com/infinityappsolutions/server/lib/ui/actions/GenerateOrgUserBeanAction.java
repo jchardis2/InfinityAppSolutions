@@ -1,9 +1,9 @@
-package com.infinityappsolutions.server.actions.ui;
+package com.infinityappsolutions.server.lib.ui.actions;
 
 import java.util.ArrayList;
 
-import com.infinityappsolutions.server.beans.LoggedInUsersOrgContainerBean;
-import com.infinityappsolutions.server.faces.FacesProvider;
+import com.infinityappsolutions.lib.server.faces.IASRootFacesProvider;
+import com.infinityappsolutions.server.lib.beans.LoggedInUsersOrgContainerBean;
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.mysql.OrgUserDAO;
@@ -17,7 +17,8 @@ public class GenerateOrgUserBeanAction {
 
 	public ArrayList<OrgUserBean> generateOrgUsersBean(long userid)
 			throws DBException, IASException {
-		LoggedInUsersOrgContainerBean liucb = FacesProvider.getInstance().getLoggedInUsersOrgContainerBean();
+		LoggedInUsersOrgContainerBean liucb = IASRootFacesProvider
+				.getInstance().getLoggedInUsersOrgContainerBean();
 		OrgUserDAO dao = new OrgUserDAO(DAOFactory.getProductionInstance());
 		ArrayList<OrgUserBean> orgUsersBeansList = dao.getOrgUsers(userid);
 		liucb.setOrgUsersBeansList(orgUsersBeansList);
@@ -26,7 +27,8 @@ public class GenerateOrgUserBeanAction {
 	}
 
 	public void setCurrentOrgUserBean(OrgUserBean oub) {
-		LoggedInUsersOrgContainerBean liucb = FacesProvider.getInstance().getLoggedInUsersOrgContainerBean();
+		LoggedInUsersOrgContainerBean liucb = IASRootFacesProvider
+				.getInstance().getLoggedInUsersOrgContainerBean();
 		liucb.setCurrentOrgUsersBean(oub);
 	}
 }

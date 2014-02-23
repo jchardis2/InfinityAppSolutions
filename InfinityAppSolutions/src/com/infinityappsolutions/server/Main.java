@@ -29,8 +29,8 @@ import org.eclipse.jetty.util.resource.ResourceCollection;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import com.infinityappsolutions.server.log.Logger;
-import com.infinityappsolutions.server.login.WebDesignerLoginAuthenticator;
+import com.infinityappsolutions.server.lib.log.Logger;
+import com.infinityappsolutions.server.lib.login.IASLoginAuthenticator;
 
 public class Main {
 
@@ -95,13 +95,13 @@ public class Main {
 		ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
 		securityHandler.setConstraintMappings(Collections
 				.unmodifiableList(constraintMappingsList));
-		WebDesignerLoginAuthenticator authenticator = new WebDesignerLoginAuthenticator(
+		IASLoginAuthenticator authenticator = new IASLoginAuthenticator(
 				"/login.xhtml", "/login-error.xhtml", false);
 		// FormAuthenticator authenticator = new
 		// FormAuthenticator("/login.xhtml", "/login-error.xhtml", false);
 		authenticator.setAlwaysSaveUri(true);
-		// WebDesignerLoginAuthenticator authenticator = new
-		// WebDesignerLoginAuthenticator();
+		// IASLoginAuthenticator authenticator = new
+		// IASLoginAuthenticator();
 		// security.setAuthenticator(new FormAuthenticator("/login.xhtml",
 		// "/login-error.xhtml", false));
 		// security.setAuthenticator(new FormAuthenticator());

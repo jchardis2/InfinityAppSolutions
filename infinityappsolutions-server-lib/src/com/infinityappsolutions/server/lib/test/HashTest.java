@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.test;
+package com.infinityappsolutions.server.lib.test;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

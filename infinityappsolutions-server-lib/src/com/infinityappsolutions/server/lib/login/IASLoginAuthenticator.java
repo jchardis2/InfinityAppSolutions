@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.login;
+package com.infinityappsolutions.server.lib.login;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -17,16 +17,16 @@ import org.eclipse.jetty.server.Authentication;
 import org.eclipse.jetty.server.UserIdentity;
 import org.eclipse.jetty.util.URIUtil;
 
-import com.infinityappsolutions.server.security.SecureHashUtil;
+import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
-public class WebDesignerLoginAuthenticator extends FormAuthenticator {
+public class IASLoginAuthenticator extends FormAuthenticator {
 
-	public WebDesignerLoginAuthenticator() {
+	public IASLoginAuthenticator() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public WebDesignerLoginAuthenticator(String login, String error, boolean dispatch) {
+	public IASLoginAuthenticator(String login, String error, boolean dispatch) {
 		super(login, error, dispatch);
 		// TODO Auto-generated constructor stub
 	}

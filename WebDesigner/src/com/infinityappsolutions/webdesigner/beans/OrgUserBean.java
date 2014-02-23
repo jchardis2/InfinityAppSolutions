@@ -1,12 +1,14 @@
 package com.infinityappsolutions.webdesigner.beans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ViewScoped
 @ManagedBean(name = "orgUserBean")
-public class OrgUserBean {
-
+public class OrgUserBean implements Serializable {
+	private static final long serialVersionUID = -2313692260336098747L;
 	private Long orgid;
 	private Long userid;
 	private String name;
@@ -19,7 +21,9 @@ public class OrgUserBean {
 	public OrgUserBean() {
 	}
 
-	public OrgUserBean(Long orgid, Long userid, String name, boolean createProjects, boolean deleteProjects, boolean editProjects, boolean addUser, boolean addAdmin) {
+	public OrgUserBean(Long orgid, Long userid, String name,
+			boolean createProjects, boolean deleteProjects,
+			boolean editProjects, boolean addUser, boolean addAdmin) {
 		super();
 		this.orgid = orgid;
 		this.userid = userid;

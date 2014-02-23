@@ -1,8 +1,8 @@
-package com.infinityappsolutions.server.log;
+package com.infinityappsolutions.server.lib.log;
 
 public class Logger {
 	private static Logger logger;
-	public static final String PROPERTY_DEBUG = "com.infinityappsolutions.server.log.Logger.SHOULDDEBUG";
+	public static final String PROPERTY_DEBUG = "com.infinityappsolutions.server.lib.log.Logger.SHOULDDEBUG";
 	private static boolean debug = false;
 
 	public static Logger getInstance() {

@@ -1,15 +1,15 @@
-package com.infinityappsolutions.server.actions;
+package com.infinityappsolutions.server.lib.actions;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.infinityappsolutions.server.faces.FacesProvider;
+import com.infinityappsolutions.lib.server.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.mysql.UserDAO;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 
-public class LoginAction {
+public class IASRootLoginAction {
 
 	/**
 	 * in case you are not using jaasloginservice
@@ -48,7 +48,7 @@ public class LoginAction {
 			HttpServletRequest request) throws ServletException, DBException {
 		request.login(username, password);
 		UserDAO userDAO = new UserDAO(DAOFactory.getProductionInstance());
-		LoggedInUserBean loggedInUserBean = FacesProvider.getInstance()
+		LoggedInUserBean loggedInUserBean = IASRootFacesProvider.getInstance()
 				.getLoggedInUserBean();
 		userDAO.getUserByCredentials(username, password, loggedInUserBean);
 	}

@@ -1,5 +1,6 @@
 package com.infinityappsolutions.server.lib.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
@@ -7,7 +8,8 @@ import javax.faces.bean.SessionScoped;
 
 @SessionScoped
 @ManagedBean(name = "loggedInUsersOrgContainerBean")
-public class LoggedInUsersOrgContainerBean {
+public class LoggedInUsersOrgContainerBean implements Serializable {
+	private static final long serialVersionUID = 527748713727226533L;
 	private ArrayList<OrgUserBean> orgUsersBeansList;
 	private OrgUserBean currentOrgUsersBean;
 
