@@ -1,0 +1,1 @@
+INSERT INTO `infinityappsolutions`.`org_users` (`orgid`, `userid`) VALUES (1, 1);

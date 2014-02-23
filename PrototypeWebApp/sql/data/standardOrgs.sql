@@ -1,0 +1,1 @@
+INSERT INTO  `infinityappsolutions`.`org` (`id` ,`name`)VALUES ('1',  'Infinity App Solutions');
