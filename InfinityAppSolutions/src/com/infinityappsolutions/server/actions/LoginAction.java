@@ -3,11 +3,11 @@ package com.infinityappsolutions.server.actions;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.infinityappsolutions.server.beans.LoggedInUserBean;
-import com.infinityappsolutions.server.dao.DAOFactory;
-import com.infinityappsolutions.server.dao.mysql.UserDAO;
-import com.infinityappsolutions.server.exceptions.DBException;
 import com.infinityappsolutions.server.faces.FacesProvider;
+import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
+import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.mysql.UserDAO;
+import com.infinityappsolutions.server.lib.exceptions.DBException;
 
 public class LoginAction {
 

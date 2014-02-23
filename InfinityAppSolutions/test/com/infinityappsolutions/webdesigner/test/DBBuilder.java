@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import com.infinityappsolutions.server.dao.DAOFactory;
-import com.infinityappsolutions.server.dao.SQLFileCache;
+import javax.naming.NamingException;
+
+import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.SQLFileCache;
 
 /**
  * Drops and rebuilds the entire database. Also provides some utility methods.
@@ -34,26 +36,26 @@ public class DBBuilder {
 		rebuildAll();
 	}
 
-	public static void rebuildAll() throws FileNotFoundException, IOException, SQLException {
+	public static void rebuildAll() throws FileNotFoundException, IOException, SQLException, NamingException {
 		DBBuilder dbBuilder = new DBBuilder(TestDAOFactory.getTestInstance());
 		dbBuilder.dropTables();
 		dbBuilder.createTables();
 		System.out.println("Operation Completed");
 	}
 
-	public void dropTables() throws FileNotFoundException, IOException, SQLException {
+	public void dropTables() throws FileNotFoundException, IOException, SQLException, NamingException {
 		List<String> queries = SQLFileCache.getInstance().getQueries("sql/dropTables.sql");
 		executeSQL(queries);
 		System.out.println("Tables dropped.");
 	}
 
-	public void createTables() throws FileNotFoundException, IOException, SQLException {
+	public void createTables() throws FileNotFoundException, IOException, SQLException, NamingException {
 		List<String> queries = SQLFileCache.getInstance().getQueries("sql/createTables.sql");
 		executeSQL(queries);
 		System.out.println("Tables created.");
 	}
 
-	public void executeSQL(List<String> queries) throws SQLException {
+	public void executeSQL(List<String> queries) throws SQLException, NamingException {
 		Connection conn = factory.getConnection();
 		long start = System.currentTimeMillis();
 		for (String sql : queries) {
@@ -74,7 +76,7 @@ public class DBBuilder {
 		conn.close();
 	}
 
-	public void executeSQLFile(String filepath) throws FileNotFoundException, SQLException, IOException {
+	public void executeSQLFile(String filepath) throws FileNotFoundException, SQLException, IOException, NamingException {
 		executeSQL(SQLFileCache.getInstance().getQueries((filepath)));
 	}
 }

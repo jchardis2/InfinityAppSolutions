@@ -7,10 +7,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.infinityappsolutions.server.actions.ui.GenerateOrgUserBeanAction;
-import com.infinityappsolutions.server.beans.OrgUserBean;
-import com.infinityappsolutions.server.exceptions.DBException;
-import com.infinityappsolutions.server.exceptions.WebDesignerException;
 import com.infinityappsolutions.server.faces.FacesProvider;
+import com.infinityappsolutions.server.lib.beans.OrgUserBean;
+import com.infinityappsolutions.server.lib.exceptions.DBException;
+import com.infinityappsolutions.server.lib.exceptions.IASException;
 
 @ViewScoped
 @ManagedBean(name = "generateOrgUserBeanView")
@@ -31,7 +31,7 @@ public class GenerateOrgUserBeanView implements Serializable {
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (WebDesignerException e) {
+		} catch (IASException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -6,9 +6,9 @@
 <!-- =============================================================== -->
 <Configure id='wac' class="org.eclipse.jetty.webapp.WebAppContext">
 
-	<Set name="contextPath">/</Set>
+	<Set name="contextPath">/webdesigner</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="."/>/InfinityAppSolutionsServer
+		<Property name="jetty.webapps" default="." />/WebDesigner
 	</Set>
 	<Set name="extractWAR">false</Set>
 

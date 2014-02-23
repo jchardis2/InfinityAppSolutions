@@ -10,7 +10,7 @@ import com.infinityappsolutions.server.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.lib.exceptions.WebDesignerException;
+import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.lib.loaders.UserLoader;
 
 /**
@@ -52,10 +52,10 @@ public class UserDAO {
 	 * @param id
 	 *            The ID of the user in question.
 	 * @return A String representing the user's first name and last name.
-	 * @throws WebDesignerException
+	 * @throws IASException
 	 * @throws DBException
 	 */
-	public String getName(long id) throws WebDesignerException, DBException {
+	public String getName(long id) throws IASException, DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -72,7 +72,7 @@ public class UserDAO {
 			} else {
 				rs.close();
 				ps.close();
-				throw new WebDesignerException("User does not exist");
+				throw new IASException("User does not exist");
 			}
 		} catch (SQLException e) {
 

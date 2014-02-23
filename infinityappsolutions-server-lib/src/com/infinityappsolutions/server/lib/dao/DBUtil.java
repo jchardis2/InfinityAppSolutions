@@ -21,7 +21,7 @@ public class DBUtil {
 	 */
 	public static boolean canObtainProductionInstance(String databaseName) {
 		try {
-			DAOFactory.getProductionInstance(databaseName).getConnection()
+			DAOFactory.getProductionInstance().getConnection()
 					.close();
 			return true;
 		} catch (SQLException e) {

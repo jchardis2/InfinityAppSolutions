@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.infinityappsolutions.server.lib.beans.OrgUserBean;
+
 @SessionScoped
 @ManagedBean(name = "loggedInUsersOrgContainerBean")
 public class LoggedInUsersOrgContainerBean {

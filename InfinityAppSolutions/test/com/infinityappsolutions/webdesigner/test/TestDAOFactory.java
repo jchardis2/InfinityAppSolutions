@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.infinityappsolutions.server.dao.DAOFactory;
-import com.infinityappsolutions.server.dao.IConnectionDriver;
+import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.IConnectionDriver;
 
 public class TestDAOFactory extends DAOFactory implements IConnectionDriver {
 

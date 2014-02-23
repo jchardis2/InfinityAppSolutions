@@ -1,6 +1,6 @@
-package com.infinityappsolutions.server.exceptions;
+package com.infinityappsolutions.server.lib.exceptions;
 
-public class WebDesignerException extends Exception {
+public class IASException extends Exception {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class WebDesignerException extends Exception {
 	 * @param message
 	 *            A message to be displayed to the screen.
 	 */
-	public WebDesignerException(String message) {
+	public IASException(String message) {
 		this.message = message;
 	}
 

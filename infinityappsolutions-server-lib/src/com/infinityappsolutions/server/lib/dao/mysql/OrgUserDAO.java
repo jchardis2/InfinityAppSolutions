@@ -10,7 +10,7 @@ import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.lib.exceptions.WebDesignerException;
+import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.lib.loaders.OrgUserLoader;
 
 public class OrgUserDAO {
@@ -36,11 +36,11 @@ public class OrgUserDAO {
 	 *            The ID of the user in question.
 	 * @return A list of OrgUserBean representing the list of orgs that a user
 	 *         is part of
-	 * @throws WebDesignerException
+	 * @throws IASException
 	 * @throws DBException
 	 */
 	public ArrayList<OrgUserBean> getOrgUsers(long id)
-			throws WebDesignerException, DBException {
+			throws IASException, DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -61,7 +61,7 @@ public class OrgUserDAO {
 		}
 	}
 
-	public int updateOrgUsers(OrgUserBean oub) throws WebDesignerException,
+	public int updateOrgUsers(OrgUserBean oub) throws IASException,
 			DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -83,7 +83,7 @@ public class OrgUserDAO {
 		}
 	}
 
-	public int insertOrgUsers(OrgUserBean oub) throws WebDesignerException,
+	public int insertOrgUsers(OrgUserBean oub) throws IASException,
 			DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -103,7 +103,7 @@ public class OrgUserDAO {
 	}
 
 	public int insertOrgUsersList(ArrayList<OrgUserBean> oub)
-			throws WebDesignerException, DBException {
+			throws IASException, DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {

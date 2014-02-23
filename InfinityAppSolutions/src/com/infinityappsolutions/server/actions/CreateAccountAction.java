@@ -1,9 +1,9 @@
 package com.infinityappsolutions.server.actions;
 
-import com.infinityappsolutions.server.beans.UserBean;
-import com.infinityappsolutions.server.dao.DAOFactory;
-import com.infinityappsolutions.server.dao.mysql.UserDAO;
-import com.infinityappsolutions.server.exceptions.DBException;
+import com.infinityappsolutions.server.lib.beans.UserBean;
+import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.mysql.UserDAO;
+import com.infinityappsolutions.server.lib.exceptions.DBException;
 
 public class CreateAccountAction {
 

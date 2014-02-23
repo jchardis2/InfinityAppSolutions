@@ -1,16 +1,13 @@
 package com.infinityappsolutions.server;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.util.Properties;
 
 import org.eclipse.jetty.deploy.DeploymentManager;
 import org.eclipse.jetty.deploy.PropertiesConfigurationManager;
 import org.eclipse.jetty.deploy.providers.WebAppProvider;
-import org.eclipse.jetty.jaas.JAASLoginService;
 import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.HttpConfiguration;
@@ -126,9 +123,10 @@ public class Main {
 		// login.setName("Test Realm");
 		// login.setConfig(jetty_base + "/etc/realm.properties");
 		// login.setRefreshInterval(0);
-//		JAASLoginService jaasLoginService = new JAASLoginService("JAASRealm");
-//		jaasLoginService.setLoginModuleName("jdbc");
-//		server.addBean(jaasLoginService);
+		// JAASLoginService jaasLoginService = new
+		// JAASLoginService("JAASRealm");
+		// jaasLoginService.setLoginModuleName("jdbc");
+		// server.addBean(jaasLoginService);
 		server.start();
 		server.join();
 	}

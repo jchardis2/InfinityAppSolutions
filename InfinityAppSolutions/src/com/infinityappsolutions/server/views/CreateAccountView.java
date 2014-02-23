@@ -8,8 +8,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import com.infinityappsolutions.server.actions.CreateAccountAction;
-import com.infinityappsolutions.server.beans.UserBean;
-import com.infinityappsolutions.server.exceptions.DBException;
+import com.infinityappsolutions.server.lib.beans.UserBean;
+import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.log.Logger;
 import com.infinityappsolutions.server.security.SecureHashUtil;
 

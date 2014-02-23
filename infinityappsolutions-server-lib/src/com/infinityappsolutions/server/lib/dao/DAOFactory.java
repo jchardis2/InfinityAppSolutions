@@ -23,16 +23,14 @@ import com.infinityappsolutions.server.lib.dao.ProductionConnectionDriver;
 public class DAOFactory {
 	private static DAOFactory productionInstance = null;
 	private IConnectionDriver driver;
-	private String PROPERTY_DATABASE_NAME = "com.infinityappsolutions.server.lib.dao.DATABASE.NAME";
-	private String PROPERTY_DATABASE_PASSWORD = "com.infinityappsolutions.server.lib.dao.DATABASE.PASSWORD";
 
 	/**
 	 * 
 	 * @return A production instance of the DAOFactory, to be used in deployment
 	 *         (by Tomcat).
 	 */
-	public static DAOFactory getProductionInstance(String databaseName) {
-		productionInstance = new DAOFactory(databaseName);
+	public static DAOFactory getProductionInstance() {
+		productionInstance = new DAOFactory();
 		return productionInstance;
 	}
 
@@ -40,9 +38,8 @@ public class DAOFactory {
 	 * Protected constructor. Call getProductionInstance to get an instance of
 	 * the DAOFactory
 	 */
-	protected DAOFactory(String databaseName) {
-		this.driver = (IConnectionDriver) new ProductionConnectionDriver(
-				databaseName);
+	protected DAOFactory() {
+		this.driver = (IConnectionDriver) new ProductionConnectionDriver();
 	}
 
 	/**

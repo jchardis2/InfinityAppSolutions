@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.infinityappsolutions.server.beans.OrgUserBean;
+import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 
 public class OrgUserLoader implements BeanLoader<OrgUserBean> {
 

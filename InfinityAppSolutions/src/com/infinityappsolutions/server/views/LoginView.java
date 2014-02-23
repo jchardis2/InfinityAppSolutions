@@ -12,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.infinityappsolutions.server.actions.LoginAction;
-import com.infinityappsolutions.server.exceptions.DBException;
+import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.security.SecureHashUtil;
 
 @ViewScoped

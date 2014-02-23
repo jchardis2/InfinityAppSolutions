@@ -19,11 +19,9 @@ import javax.sql.DataSource;
  */
 public class ProductionConnectionDriver implements IConnectionDriver {
 	private InitialContext initialContext;
-	private String databaseName;
 
 	// In production situations
-	public ProductionConnectionDriver(String databaseName) {
-		this.databaseName = databaseName;
+	public ProductionConnectionDriver() {
 	}
 
 	// For our special unit test - do not use unless you know what you are doing

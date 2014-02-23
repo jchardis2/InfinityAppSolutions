@@ -2,7 +2,7 @@ package com.infinityappsolutions.server.lib.exceptions;
 
 import java.sql.SQLException;
 
-public class DBException extends WebDesignerException {
+public class DBException extends IASException {
 	private static final long serialVersionUID = -6554118510590118376L;
 	private SQLException sqlException = null;
 
