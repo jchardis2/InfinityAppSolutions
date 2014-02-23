@@ -4,26 +4,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import org.eclipse.jetty.jaas.JAASLoginService;
-import org.eclipse.jetty.jaas.callback.DefaultCallbackHandler;
-import org.eclipse.jetty.jaas.callback.ObjectCallback;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.JDBCLoginService;
-import org.eclipse.jetty.security.authentication.FormAuthenticator;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import com.infinityappsolutions.webdesigner.log.Logger;
-import com.infinityappsolutions.webdesigner.login.WebDesignerLoginAuthenticator;
+import com.infinityappsolutions.server.lib.log.Logger;
+import com.infinityappsolutions.server.lib.login.IASLoginAuthenticator;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		System.setProperty("java.security.auth.login.config", "/home/jchardis/git/Webclipse/WebDesignerServer/etc/login.conf");
+		System.setProperty("java.security.auth.login.config",
+				"/home/jchardis/git/Webclipse/WebDesignerServer/etc/login.conf");
 
 		Server server = new Server(8080);
 		// MBeanContainer mbContainer = new MBeanContainer(
@@ -34,11 +31,13 @@ public class Main {
 		// HashLoginService hashLoginService = new HashLoginService("Realm",
 		// "etc/realm.properties");
 
-		JDBCLoginService jdbcLoginService = new JDBCLoginService("JDBCRealm", "etc/jdbcRealm.properties");
+		JDBCLoginService jdbcLoginService = new JDBCLoginService("JDBCRealm",
+				"etc/jdbcRealm.properties");
 
 		JAASLoginService jaasLoginService = new JAASLoginService("JAASRealm");
 		jaasLoginService.setLoginModuleName("jdbc");
-		jaasLoginService.setIdentityService(jdbcLoginService.getIdentityService());
+		jaasLoginService.setIdentityService(jdbcLoginService
+				.getIdentityService());
 		// jaasLoginService.setCallbackHandlerClass(DefaultCallbackHandler.class.getName());
 
 		Constraint constraintUsers = new Constraint();
@@ -75,8 +74,10 @@ public class Main {
 		constraintMappingsList.add(mappingNoUser);
 
 		ConstraintSecurityHandler security = new ConstraintSecurityHandler();
-		security.setConstraintMappings(Collections.unmodifiableList(constraintMappingsList));
-		WebDesignerLoginAuthenticator authenticator = new WebDesignerLoginAuthenticator("/login.xhtml", "/login-error.xhtml", false);
+		security.setConstraintMappings(Collections
+				.unmodifiableList(constraintMappingsList));
+		IASLoginAuthenticator authenticator = new IASLoginAuthenticator(
+				"/login.xhtml", "/login-error.xhtml", false);
 		// FormAuthenticator authenticator = new
 		// FormAuthenticator("/login.xhtml", "/login-error.xhtml", false);
 		authenticator.setAlwaysSaveUri(true);

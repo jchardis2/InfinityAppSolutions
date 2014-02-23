@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.infinityappsolutions.server.lib.loaders.BeanLoader;
 import com.infinityappsolutions.webdesigner.beans.ProjectBean;
 
 public class ProjectLoader implements BeanLoader<ProjectBean> {
