@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.infinityappsolutions.lib.server.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
+import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.ui.actions.GenerateOrgUserBeanAction;
 
 @ViewScoped

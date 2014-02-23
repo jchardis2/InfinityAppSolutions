@@ -1,1 +1,1 @@
-INSERT INTO `infinityappsolutions`.`user_role` (`user_username`, `role_name`) VALUES ('jchardis', 'user');
+INSERT INTO `terms`.`user_role` (`user_username`, `role_name`) VALUES ('jchardis', 'user');

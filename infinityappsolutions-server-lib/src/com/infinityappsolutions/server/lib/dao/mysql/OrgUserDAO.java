@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.NamingException;
+
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
@@ -39,8 +41,8 @@ public class OrgUserDAO {
 	 * @throws IASException
 	 * @throws DBException
 	 */
-	public ArrayList<OrgUserBean> getOrgUsers(long id)
-			throws IASException, DBException {
+	public ArrayList<OrgUserBean> getOrgUsers(long id) throws IASException,
+			DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -54,15 +56,14 @@ public class OrgUserDAO {
 			rs.close();
 			ps.close();
 			return orgUsersList;
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);
 		}
 	}
 
-	public int updateOrgUsers(OrgUserBean oub) throws IASException,
-			DBException {
+	public int updateOrgUsers(OrgUserBean oub) throws IASException, DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -76,15 +77,15 @@ public class OrgUserDAO {
 			int rs = ps.executeUpdate();
 			ps.close();
 			return rs;
-		} catch (SQLException e) {
+
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);
 		}
 	}
 
-	public int insertOrgUsers(OrgUserBean oub) throws IASException,
-			DBException {
+	public int insertOrgUsers(OrgUserBean oub) throws IASException, DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -95,7 +96,8 @@ public class OrgUserDAO {
 			int rs = ps.executeUpdate();
 			ps.close();
 			return rs;
-		} catch (SQLException e) {
+
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);
@@ -117,7 +119,7 @@ public class OrgUserDAO {
 			}
 			ps.close();
 			return rs;
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);

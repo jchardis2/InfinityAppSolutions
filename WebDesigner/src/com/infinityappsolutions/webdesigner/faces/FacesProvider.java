@@ -1,6 +1,6 @@
 package com.infinityappsolutions.webdesigner.faces;
 
-import com.infinityappsolutions.lib.server.faces.IASRootFacesProvider;
+import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 
 /**
  * A Singleton class for returning the different beans for production. This also

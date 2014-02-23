@@ -7,8 +7,13 @@ public class DBException extends IASException {
 	private SQLException sqlException = null;
 
 	public DBException(SQLException e) {
-		super("A database exception has occurred. Please see the log in the console for stacktrace");
+		super(
+				"A database exception has occurred. Please see the log in the console for stacktrace");
 		this.sqlException = e;
+	}
+
+	public DBException(Exception e) {
+		super(e.getMessage());
 	}
 
 	/**

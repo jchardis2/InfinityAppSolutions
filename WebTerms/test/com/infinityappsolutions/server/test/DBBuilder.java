@@ -1,4 +1,4 @@
-package com.infinityappsolutions.webdesigner.test;
+package com.infinityappsolutions.server.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.SQLFileCache;
+import com.infinityappsolutions.webdesigner.test.TestDAOFactory;
 
 /**
  * Drops and rebuilds the entire database. Also provides some utility methods.

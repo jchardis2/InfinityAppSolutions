@@ -1,25 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>JettyServer</groupId>
-	<artifactId>JettyServer</artifactId>
+	<groupId>InfinityAppSolutions</groupId>
+	<artifactId>InfinityAppSolutions</artifactId>
 	<version>0.0.1</version>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<finalName>JettyServer</finalName>
-		<directory>target</directory>
-		<outputDirectory>./WebContent/WEB-INF/classes</outputDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	<repositories>
 		<repository>
 			<id>java.net.m2</id>
@@ -104,5 +88,70 @@
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
 		</dependency>
+		<dependency>
+			<groupId>infinityappsolutions-server-lib</groupId>
+			<artifactId>infinityappsolutions-server-lib</artifactId>
+			<version>0.0.1</version>
+			<scope>jar</scope>
+		</dependency>
 	</dependencies>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<finalName>InfinityAppSolutions</finalName>
+		<directory>target</directory>
+		<outputDirectory>./WEB-INF/classes</outputDirectory>
+		<packaging>war</packaging>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

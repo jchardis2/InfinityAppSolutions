@@ -1,7 +1,6 @@
 package com.infinityappsolutions.server.lib.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -29,7 +28,7 @@ public class ProductionConnectionDriver implements IConnectionDriver {
 		initialContext = context;
 	}
 
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException, NamingException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -46,9 +45,14 @@ public class ProductionConnectionDriver implements IConnectionDriver {
 						("Context Lookup Naming Exception: " + e1.getMessage()));
 			}
 		}
+		if (initialContext == null)
+			initialContext = new InitialContext();
+		InitialContext ic = new InitialContext();
+		DataSource myDS = (DataSource) ic.lookup("java:comp/env/jdbc/main");
+		return myDS.getConnection();
 
-		return DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/infinityappsolutions", "ias",
-				"mytestpassword");
+		// return DriverManager.getConnection(
+		// "jdbc:mysql://localhost:3306/infinityappsolutions", "ias",
+		// "mytestpassword");
 	}
 }

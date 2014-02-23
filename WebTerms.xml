@@ -6,9 +6,9 @@
 <!-- =============================================================== -->
 <Configure id='wac' class="org.eclipse.jetty.webapp.WebAppContext">
 
-	<Set name="contextPath">/</Set>
+	<Set name="contextPath">/terms</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="." />/InfinityAppSolutions
+		<Property name="jetty.webapps" default="." />/WebTerms
 	</Set>
 	<Set name="extractWAR">false</Set>
 
@@ -22,7 +22,7 @@
 			</Set>
 		</New>
 	</Set>
-	<New id="main" class="org.eclipse.jetty.plus.jndi.Resource">
+	<New id="webterms" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg></Arg>
 		<Arg>jdbc/main</Arg>
 		<Arg>
@@ -33,20 +33,6 @@
 			</New>
 		</Arg>
 	</New>
-
-	<Array id="plusConfig" type="java.lang.String">
-		<Item>org.eclipse.jetty.webapp.WebInfConfiguration</Item>
-		<Item>org.eclipse.jetty.webapp.WebXmlConfiguration</Item>
-		<Item>org.eclipse.jetty.webapp.MetaInfConfiguration</Item>
-		<Item>org.eclipse.jetty.webapp.FragmentConfiguration</Item>
-		<Item>org.eclipse.jetty.plus.webapp.EnvConfiguration</Item>     <!-- add for JNDI -->
-		<Item>org.eclipse.jetty.plus.webapp.PlusConfiguration</Item>    <!-- add for JNDI -->
-		<Item>org.eclipse.jetty.webapp.JettyWebXmlConfiguration</Item>
-	</Array>
-
-	<Set name="configurationClasses">
-		<Ref refid="plusConfig" />
-	</Set>
 </Configure>
 
 

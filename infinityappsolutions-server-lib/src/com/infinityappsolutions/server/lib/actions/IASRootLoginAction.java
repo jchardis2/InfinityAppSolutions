@@ -3,11 +3,11 @@ package com.infinityappsolutions.server.lib.actions;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.infinityappsolutions.lib.server.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.mysql.UserDAO;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
+import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 
 public class IASRootLoginAction {
 

@@ -2,13 +2,13 @@ package com.infinityappsolutions.server.lib.ui.actions;
 
 import java.util.ArrayList;
 
-import com.infinityappsolutions.lib.server.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.beans.LoggedInUsersOrgContainerBean;
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.dao.mysql.OrgUserDAO;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
+import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 
 public class GenerateOrgUserBeanAction {
 

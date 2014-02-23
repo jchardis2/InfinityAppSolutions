@@ -3,6 +3,8 @@ package com.infinityappsolutions.server.lib.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.naming.NamingException;
+
 import com.infinityappsolutions.server.lib.dao.IConnectionDriver;
 import com.infinityappsolutions.server.lib.dao.ProductionConnectionDriver;
 
@@ -46,8 +48,9 @@ public class DAOFactory {
 	 * 
 	 * @return this DAOFactory's Connection
 	 * @throws SQLException
+	 * @throws NamingException 
 	 */
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException, NamingException {
 		try {
 			return driver.getConnection();
 		} catch (ClassNotFoundException e) {

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.NamingException;
+
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 
 /**
@@ -18,8 +20,9 @@ public class DBUtil {
 	 * Used to check if we can actually obtain a connection.
 	 * 
 	 * @return
+	 * @throws NamingException 
 	 */
-	public static boolean canObtainProductionInstance(String databaseName) {
+	public static boolean canObtainProductionInstance(String databaseName) throws NamingException {
 		try {
 			DAOFactory.getProductionInstance().getConnection()
 					.close();

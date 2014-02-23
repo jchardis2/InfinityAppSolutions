@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.NamingException;
+
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
@@ -60,12 +62,14 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("SELECT firstName, lastName FROM users WHERE id=?");
+			ps = conn
+					.prepareStatement("SELECT firstName, lastName FROM users WHERE id=?");
 			ps.setLong(1, id);
 			ResultSet rs;
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				String result = rs.getString("firstname") + " " + rs.getString("lastname");
+				String result = rs.getString("firstname") + " "
+						+ rs.getString("lastname");
 				rs.close();
 				ps.close();
 				return result;
@@ -74,8 +78,8 @@ public class UserDAO {
 				ps.close();
 				throw new IASException("User does not exist");
 			}
-		} catch (SQLException e) {
 
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);
@@ -98,8 +102,7 @@ public class UserDAO {
 			long a = DBUtil.getLastInsert(conn);
 			ps.close();
 			return a;
-		} catch (SQLException e) {
-
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);
@@ -117,7 +120,8 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("INSERT INTO  `webdesigner`.`users` (`id` ,`username` ,`email` ,`password` ,`firstname` ,`lastname`)VALUES (?,  ?,  ?,  ?,  ?,  ?);");
+			ps = conn
+					.prepareStatement("INSERT INTO  `webdesigner`.`users` (`id` ,`username` ,`email` ,`password` ,`firstname` ,`lastname`)VALUES (?,  ?,  ?,  ?,  ?,  ?);");
 			if (ub.getId() == null) {
 				ub.setId(0L);
 			}
@@ -127,8 +131,7 @@ public class UserDAO {
 			ps.close();
 			addUserToRoleTable(ub);
 			return a;
-		} catch (SQLException e) {
-
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);
@@ -140,11 +143,12 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("INSERT INTO  `webdesigner`.`user_role` (`user_username` ,`role_name`)VALUES (?,  'user');");
+			ps = conn
+					.prepareStatement("INSERT INTO  `webdesigner`.`user_role` (`user_username` ,`role_name`)VALUES (?,  'user');");
 			ps.setString(1, ub.getUsername());
 			ps.executeUpdate();
 			ps.close();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			throw new DBException(e);
 		} finally {
 			DBUtil.closeConnection(conn, ps);
@@ -177,7 +181,7 @@ public class UserDAO {
 				ps.close();
 				return null;
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 
 			throw new DBException(e);
 		} finally {
@@ -193,12 +197,14 @@ public class UserDAO {
 	 * @return A UserBean representing the user.
 	 * @throws DBException
 	 */
-	public UserBean getUserByCredentials(String username, String password, LoggedInUserBean loggedInUserBean) throws DBException {
+	public UserBean getUserByCredentials(String username, String password,
+			LoggedInUserBean loggedInUserBean) throws DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
+			ps = conn
+					.prepareStatement("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
@@ -212,7 +218,7 @@ public class UserDAO {
 				ps.close();
 				return null;
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 
 			throw new DBException(e);
 		} finally {
@@ -232,12 +238,13 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("UPDATE  `webdesigner`.`users` SET  `id` =  ?,`username` =  '?,`email` =  ?,`password` =  ?,`firstname` =  ?,`lastname` =  ?' WHERE  `users`.`id` =?;");
+			ps = conn
+					.prepareStatement("UPDATE  `webdesigner`.`users` SET  `id` =  ?,`username` =  '?,`email` =  ?,`password` =  ?,`firstname` =  ?,`lastname` =  ?' WHERE  `users`.`id` =?;");
 			userLoader.loadParameters(ps, ub);
 			int parameterCount = ps.getParameterMetaData().getParameterCount();
 			ps.setLong(parameterCount, ub.getId());
 			ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 
 			throw new DBException(e);
 		} finally {
@@ -257,13 +264,14 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("UPDATE  `webdesigner`.`users` SET  `password` =  ? WHERE  `users`.`id` =?;");
+			ps = conn
+					.prepareStatement("UPDATE  `webdesigner`.`users` SET  `password` =  ? WHERE  `users`.`id` =?;");
 			userLoader.loadParameters(ps, ub);
 			int parameterCount = ps.getParameterMetaData().getParameterCount();
 			ps.setString(1, ub.getPassword());
 			ps.setLong(2, ub.getId());
 			ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 
 			throw new DBException(e);
 		} finally {

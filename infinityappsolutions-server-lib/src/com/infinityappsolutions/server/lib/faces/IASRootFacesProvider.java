@@ -1,4 +1,4 @@
-package com.infinityappsolutions.lib.server.faces;
+package com.infinityappsolutions.server.lib.faces;
 
 import javax.faces.context.FacesContext;
 

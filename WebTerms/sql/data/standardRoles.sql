@@ -1,2 +1,2 @@
-INSERT INTO `infinityappsolutions`.`roles` (`id`, `role`) VALUES ('1', 'user');
-INSERT INTO `infinityappsolutions`.`roles` (`id`, `role`) VALUES ('2', 'admin');
+INSERT INTO `terms`.`roles` (`id`, `role`) VALUES ('1', 'user');
+INSERT INTO `terms`.`roles` (`id`, `role`) VALUES ('2', 'admin');
