@@ -4,8 +4,11 @@
 	<groupId>infinityappsolutions-server-lib</groupId>
 	<artifactId>infinityappsolutions-server-lib</artifactId>
 	<version>0.0.1</version>
+	<packaging>jar</packaging>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>target</outputDirectory>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

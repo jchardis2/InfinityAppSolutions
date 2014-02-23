@@ -88,19 +88,12 @@
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
 		</dependency>
-		<dependency>
-			<groupId>infinityappsolutions-server-lib</groupId>
-			<artifactId>infinityappsolutions-server-lib</artifactId>
-			<version>0.0.1</version>
-			<scope>jar</scope>
-		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<finalName>InfinityAppSolutions</finalName>
 		<directory>target</directory>
 		<outputDirectory>./WEB-INF/classes</outputDirectory>
-		<packaging>war</packaging>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -110,48 +103,6 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/lib</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-dependency-plugin</artifactId>
-										<versionRange>[2.0,)</versionRange>
-										<goals>
-											<goal>copy-dependencies</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 </project>
