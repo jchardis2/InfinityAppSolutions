@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.test;
+package com.infinityappsolutions.webdesigner.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 import com.infinityappsolutions.server.lib.dao.DAOFactory;
-import com.infinityappsolutions.webdesigner.test.DBBuilder;
-import com.infinityappsolutions.webdesigner.test.TestDAOFactory;
 
 /**
  * This TestDataGenerator class is in charge of centralizing all of the test

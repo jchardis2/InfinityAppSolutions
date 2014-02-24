@@ -72,7 +72,7 @@ public class LoginView implements Serializable {
 					.getLoggedInUserBean();
 			action.login(username, password, request, liub);
 			context.getExternalContext().redirect("/user/home.xhtml");
-			return "/user/home.xhtml?faces-redirect=true";
+			return "user/home.xhtml?faces-redirect=true";
 		} catch (ServletException e) {
 			e.printStackTrace();
 			context.addMessage(null, new FacesMessage("Login failed."));
