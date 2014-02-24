@@ -6,16 +6,18 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
+import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
+import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
-@ViewScoped
+@SessionScoped
 @ManagedBean(name = "loginView")
 public class LoginView implements Serializable {
 	private static final long serialVersionUID = 8037321240967773536L;
@@ -60,12 +62,15 @@ public class LoginView implements Serializable {
 
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
 		IASRootLoginAction action = new IASRootLoginAction();
 		try {
 			SecureHashUtil hashUtil = new SecureHashUtil();
 			password = hashUtil.sha256Hash((String) password);
-			action.login(username, password, request);
+			LoggedInUserBean liub = IASRootFacesProvider.getInstance()
+					.getLoggedInUserBean();
+			action.login(username, password, request, liub);
 			context.getExternalContext().redirect("/user/home.xhtml");
 			return "/user/home.xhtml?faces-redirect=true";
 		} catch (ServletException e) {
@@ -98,13 +103,15 @@ public class LoginView implements Serializable {
 		return "error";
 	}
 
-	public void logout() {
+	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
 		try {
 			IASRootLoginAction action = new IASRootLoginAction();
 			action.logout(request);
 			context.getExternalContext().redirect("/login.xhtml");
+			return "";
 		} catch (ServletException e) {
 			e.printStackTrace();
 			context.addMessage(null, new FacesMessage("Logout failed."));
@@ -113,5 +120,6 @@ public class LoginView implements Serializable {
 			e.printStackTrace();
 			context.addMessage(null, new FacesMessage("Failed to redirect."));
 		}
+		return "";
 	}
 }
