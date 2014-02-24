@@ -26,6 +26,16 @@
 		</auth-constraint>
 	</security-constraint>
 
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>JAAS Role</web-resource-name>
+			<url-pattern>/webdesigner/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+	</security-constraint>
+
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>jdbc</realm-name>

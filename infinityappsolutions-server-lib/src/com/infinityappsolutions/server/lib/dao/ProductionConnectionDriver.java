@@ -55,4 +55,34 @@ public class ProductionConnectionDriver implements IConnectionDriver {
 		// "jdbc:mysql://localhost:3306/infinityappsolutions", "ias",
 		// "mytestpassword");
 	}
+
+	public Connection getConnection(String dbName) throws SQLException,
+			NamingException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				if (initialContext == null)
+					initialContext = new InitialContext();
+				return ((DataSource) (((Context) initialContext
+						.lookup("java:comp/env")))
+						.lookup("jdbc/infinityappsolutions")).getConnection();
+			} catch (NamingException e1) {
+				throw new SQLException(
+						("Context Lookup Naming Exception: " + e1.getMessage()));
+			}
+		}
+		if (initialContext == null)
+			initialContext = new InitialContext();
+		InitialContext ic = new InitialContext();
+		DataSource myDS = (DataSource) ic
+				.lookup("java:comp/env/jdbc/" + dbName);
+		return myDS.getConnection();
+
+		// return DriverManager.getConnection(
+		// "jdbc:mysql://localhost:3306/infinityappsolutions", "ias",
+		// "mytestpassword");
+	}
 }
