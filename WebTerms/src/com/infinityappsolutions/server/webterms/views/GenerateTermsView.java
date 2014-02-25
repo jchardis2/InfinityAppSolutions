@@ -52,7 +52,7 @@ public class GenerateTermsView implements Serializable {
 		GenerateTermsAction generateTermsAction = new GenerateTermsAction(
 				DAOFactory.getProductionInstance());
 		try {
-			termList = generateTermsAction.generateOrgUsersBean();
+			termList = generateTermsAction.generateTermList();
 			return termList;
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
@@ -81,6 +81,19 @@ public class GenerateTermsView implements Serializable {
 
 		try {
 			generateTermsAction.saveTerm(term);
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void generateEmptyTerm() {
+		GenerateTermsAction generateTermsAction = new GenerateTermsAction(
+				DAOFactory.getProductionInstance());
+
+		try {
+			generateTermsAction.generateEmptyTerm();
+			generateTerms();
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

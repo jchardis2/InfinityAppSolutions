@@ -116,8 +116,32 @@ public class TermsDAO {
 					.prepareStatement("UPDATE  `terms`.`terms` SET  `id` =?,`name` =?,`definition`=?,`ownerid`=? WHERE  `terms`.`id` =? AND `terms`.`ownerid` =?;");
 			termsLoader.loadParameters(ps, term);
 			int parameterCount = ps.getParameterMetaData().getParameterCount();
-			ps.setLong(parameterCount-1, term.getId());
+			ps.setLong(parameterCount - 1, term.getId());
 			ps.setLong(parameterCount, term.getOwnerId());
+			ps.executeUpdate();
+		} catch (SQLException | NamingException e) {
+
+			throw new DBException(e);
+		} finally {
+			DBUtil.closeConnection(conn, ps);
+		}
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param term
+	 *            The term bean representing the term.
+	 * @throws DBException
+	 */
+	public void insertTerm(Term term) throws DBException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = factory.getConnection();
+			ps = conn
+					.prepareStatement("INSERT INTO  `terms`.`terms` (`id` ,`name` ,`definition` ,`ownerid`)VALUES (? ,  ?,  ?,  ?);");
+			termsLoader.loadParameters(ps, term);
 			ps.executeUpdate();
 		} catch (SQLException | NamingException e) {
 

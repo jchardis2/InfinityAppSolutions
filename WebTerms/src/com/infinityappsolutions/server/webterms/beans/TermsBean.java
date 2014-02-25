@@ -48,7 +48,7 @@ public class TermsBean implements Serializable {
 		GenerateTermsAction generateTermsAction = new GenerateTermsAction(
 				DAOFactory.getProductionInstance());
 		try {
-			termsList = generateTermsAction.generateOrgUsersBean();
+			termsList = generateTermsAction.generateTermList();
 			return termsList;
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
