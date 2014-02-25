@@ -1,3 +1,7 @@
+DELETE FROM termtogroup;
+DELETE FROM termgroup;
+DELETE FROM termtouser;
+DELETE FROM terms;
 DELETE FROM users;
 DELETE FROM roles;
 DELETE FROM user_role;

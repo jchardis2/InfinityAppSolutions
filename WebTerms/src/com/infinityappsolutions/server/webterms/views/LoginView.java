@@ -1,4 +1,4 @@
-package com.infinityappsolutions.server.views;
+package com.infinityappsolutions.server.webterms.views;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -11,12 +11,12 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.infinityappsolutions.server.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.security.SecureHashUtil;
+import com.infinityappsolutions.server.webterms.dao.DAOFactory;
 
 @SessionScoped
 @ManagedBean(name = "loginView")

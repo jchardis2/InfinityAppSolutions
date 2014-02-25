@@ -1,12 +1,14 @@
 package com.infinityappsolutions.server.lib.beans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ViewScoped
 @ManagedBean(name = "orgUserBean")
-public class OrgUserBean {
-
+public class OrgUserBean implements Serializable {
+	private static final long serialVersionUID = -2654536084040779773L;
 	private Long orgid;
 	private Long userid;
 	private String name;

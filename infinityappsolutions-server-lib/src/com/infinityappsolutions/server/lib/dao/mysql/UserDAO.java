@@ -25,9 +25,9 @@ import com.infinityappsolutions.server.lib.loaders.UserLoader;
  * can assume that all data has been validated and is correct.
  * 
  * DAOs should never have setters or any other parameter to the constructor than
- * a factory. All DAOs should be accessed by AbstractDAOFactory (@see {@link AbstractDAOFactory}
- * ) and every DAO should have a factory - for obtaining JDBC connections and/or
- * accessing other DAOs.
+ * a factory. All DAOs should be accessed by AbstractDAOFactory (@see
+ * {@link AbstractDAOFactory} ) and every DAO should have a factory - for
+ * obtaining JDBC connections and/or accessing other DAOs.
  * 
  * 
  * 
@@ -40,8 +40,8 @@ public class UserDAO {
 	 * The typical constructor.
 	 * 
 	 * @param factory
-	 *            The {@link AbstractDAOFactory} associated with this DAO, which is used
-	 *            for obtaining SQL connections, etc.
+	 *            The {@link AbstractDAOFactory} associated with this DAO, which
+	 *            is used for obtaining SQL connections, etc.
 	 */
 	public UserDAO(AbstractDAOFactory factory) {
 		this.factory = factory;

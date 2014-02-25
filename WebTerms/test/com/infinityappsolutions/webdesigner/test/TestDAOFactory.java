@@ -24,7 +24,7 @@ public class TestDAOFactory extends AbstractDAOFactory implements
 
 	@Override
 	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/proto",
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/termsList",
 				"ias", "mytestpassword");
 	}
 }
