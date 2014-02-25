@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 /**
- * Used by DAOFactory to abstract away different ways of getting our JDBC
+ * Used by AbstractDAOFactory to abstract away different ways of getting our JDBC
  * connection
  * 
  * 

@@ -9,24 +9,24 @@ import java.util.ArrayList;
 import javax.naming.NamingException;
 
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;
-import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.lib.loaders.OrgUserLoader;
 
 public class OrgUserDAO {
-	private DAOFactory factory;
+	private AbstractDAOFactory factory;
 	private OrgUserLoader orgUserLoader;
 
 	/**
 	 * The typical constructor.
 	 * 
 	 * @param factory
-	 *            The {@link DAOFactory} associated with this DAO, which is used
+	 *            The {@link AbstractDAOFactory} associated with this DAO, which is used
 	 *            for obtaining SQL connections, etc.
 	 */
-	public OrgUserDAO(DAOFactory factory) {
+	public OrgUserDAO(AbstractDAOFactory factory) {
 		this.factory = factory;
 		this.orgUserLoader = new OrgUserLoader();
 	}

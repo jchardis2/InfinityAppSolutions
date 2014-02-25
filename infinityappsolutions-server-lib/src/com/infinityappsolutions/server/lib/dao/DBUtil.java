@@ -20,12 +20,12 @@ public class DBUtil {
 	 * Used to check if we can actually obtain a connection.
 	 * 
 	 * @return
-	 * @throws NamingException 
+	 * @throws NamingException
 	 */
-	public static boolean canObtainProductionInstance(String databaseName) throws NamingException {
+	public static boolean canObtainProductionInstance(String resourceName)
+			throws NamingException {
 		try {
-			DAOFactory.getProductionInstance().getConnection()
-					.close();
+			AbstractDAOFactory.getProductionInstance().getConnection().close();
 			return true;
 		} catch (SQLException e) {
 			System.out.println(e);

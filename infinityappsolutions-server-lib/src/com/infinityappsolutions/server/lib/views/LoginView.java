@@ -5,20 +5,18 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
-@SessionScoped
-@ManagedBean(name = "loginView")
+
 public class LoginView implements Serializable {
 	private static final long serialVersionUID = 8037321240967773536L;
 	private String username;
@@ -64,14 +62,15 @@ public class LoginView implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		IASRootLoginAction action = new IASRootLoginAction();
+		IASRootLoginAction action = new IASRootLoginAction(
+				AbstractDAOFactory.getProductionInstance());
 		try {
 			SecureHashUtil hashUtil = new SecureHashUtil();
 			password = hashUtil.sha256Hash((String) password);
 			LoggedInUserBean liub = IASRootFacesProvider.getInstance()
 					.getLoggedInUserBean();
 			action.login(username, password, request, liub);
-			context.getExternalContext().redirect("/user/home.xhtml");
+			context.getExternalContext().redirect("user/home.xhtml");
 			return "user/home.xhtml?faces-redirect=true";
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -108,7 +107,8 @@ public class LoginView implements Serializable {
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 		try {
-			IASRootLoginAction action = new IASRootLoginAction();
+			IASRootLoginAction action = new IASRootLoginAction(
+					AbstractDAOFactory.getProductionInstance());
 			action.logout(request);
 			context.getExternalContext().redirect("/login.xhtml");
 			return "";

@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.dao.SQLFileCache;
 
 /**
@@ -22,13 +22,13 @@ public class DBBuilder {
 	public static int numExecuted = 0;
 	public static long queryTimeTaken = 0;
 
-	private DAOFactory factory;
+	private AbstractDAOFactory factory;
 
 	public DBBuilder() {
 		factory = TestDAOFactory.getTestInstance();
 	}
 
-	public DBBuilder(DAOFactory factory) {
+	public DBBuilder(AbstractDAOFactory factory) {
 		this.factory = factory;
 	}
 

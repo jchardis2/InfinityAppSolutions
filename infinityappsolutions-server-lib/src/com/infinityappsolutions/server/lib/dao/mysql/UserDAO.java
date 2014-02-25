@@ -9,7 +9,7 @@ import javax.naming.NamingException;
 
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.beans.UserBean;
-import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
@@ -25,7 +25,7 @@ import com.infinityappsolutions.server.lib.loaders.UserLoader;
  * can assume that all data has been validated and is correct.
  * 
  * DAOs should never have setters or any other parameter to the constructor than
- * a factory. All DAOs should be accessed by DAOFactory (@see {@link DAOFactory}
+ * a factory. All DAOs should be accessed by AbstractDAOFactory (@see {@link AbstractDAOFactory}
  * ) and every DAO should have a factory - for obtaining JDBC connections and/or
  * accessing other DAOs.
  * 
@@ -33,17 +33,17 @@ import com.infinityappsolutions.server.lib.loaders.UserLoader;
  * 
  */
 public class UserDAO {
-	private DAOFactory factory;
+	private AbstractDAOFactory factory;
 	private UserLoader userLoader;
 
 	/**
 	 * The typical constructor.
 	 * 
 	 * @param factory
-	 *            The {@link DAOFactory} associated with this DAO, which is used
+	 *            The {@link AbstractDAOFactory} associated with this DAO, which is used
 	 *            for obtaining SQL connections, etc.
 	 */
-	public UserDAO(DAOFactory factory) {
+	public UserDAO(AbstractDAOFactory factory) {
 		this.factory = factory;
 		this.userLoader = new UserLoader();
 	}

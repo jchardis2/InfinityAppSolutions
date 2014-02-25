@@ -1,1 +1,1 @@
-INSERT INTO `terms`.`user_role` (`user_username`, `role_name`) VALUES ('jchardis', 'user');
+INSERT INTO `user_role` (`user_username`, `role_name`) VALUES ('jchardis', 'user');

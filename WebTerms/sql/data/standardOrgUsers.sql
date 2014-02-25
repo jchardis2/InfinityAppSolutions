@@ -1,1 +1,1 @@
-INSERT INTO `terms`.`org_users` (`orgid`, `userid`) VALUES (1, 1);
+INSERT INTO `org_users` (`orgid`, `userid`) VALUES (1, 1);

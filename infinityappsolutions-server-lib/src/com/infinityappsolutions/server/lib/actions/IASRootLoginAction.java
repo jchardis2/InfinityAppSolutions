@@ -4,12 +4,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
-import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.dao.mysql.UserDAO;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 
 public class IASRootLoginAction {
+	public AbstractDAOFactory daoFactory;
+
+	public IASRootLoginAction(AbstractDAOFactory daoFactory) {
+		this.daoFactory = daoFactory;
+	}
 
 	/**
 	 * in case you are not using jaasloginservice
@@ -47,7 +52,7 @@ public class IASRootLoginAction {
 	public void login(String username, String password,
 			HttpServletRequest request) throws ServletException, DBException {
 		request.login(username, password);
-		UserDAO userDAO = new UserDAO(DAOFactory.getProductionInstance());
+		UserDAO userDAO = new UserDAO(daoFactory);
 		LoggedInUserBean loggedInUserBean = IASRootFacesProvider.getInstance()
 				.getLoggedInUserBean();
 		userDAO.getUserByCredentials(username, password, loggedInUserBean);
@@ -72,7 +77,7 @@ public class IASRootLoginAction {
 			HttpServletRequest request, LoggedInUserBean loggedInUserBean)
 			throws ServletException, DBException {
 		request.login(username, password);
-		UserDAO userDAO = new UserDAO(DAOFactory.getProductionInstance());
+		UserDAO userDAO = new UserDAO(daoFactory);
 		userDAO.getUserByCredentials(username, password, loggedInUserBean);
 	}
 

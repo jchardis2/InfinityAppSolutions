@@ -3,17 +3,13 @@ package com.infinityappsolutions.server.lib.views;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.ui.actions.GenerateOrgUserBeanAction;
 
-@ViewScoped
-@ManagedBean(name = "generateOrgUserBeanView")
 public class GenerateOrgUserBeanView implements Serializable {
 	private static final long serialVersionUID = 1888897305093017519L;
 	private ArrayList<OrgUserBean> orgUsersBeansList;
@@ -23,7 +19,8 @@ public class GenerateOrgUserBeanView implements Serializable {
 	}
 
 	public ArrayList<OrgUserBean> generateOrgUsersBean() {
-		GenerateOrgUserBeanAction action = new GenerateOrgUserBeanAction();
+		GenerateOrgUserBeanAction action = new GenerateOrgUserBeanAction(
+				AbstractDAOFactory.getProductionInstance());
 		try {
 			orgUsersBeansList = action
 					.generateOrgUsersBean(IASRootFacesProvider.getInstance()

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
-import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 
 /**
  * This TestDataGenerator class is in charge of centralizing all of the test
@@ -41,13 +41,13 @@ public class TestDataGenerator {
 
 	private String DIR = "sql/data";
 
-	private DAOFactory factory;
+	private AbstractDAOFactory factory;
 
 	public TestDataGenerator() {
 		this.factory = TestDAOFactory.getTestInstance();
 	}
 
-	public TestDataGenerator(String projectHome, DAOFactory factory) {
+	public TestDataGenerator(String projectHome, AbstractDAOFactory factory) {
 		this.DIR = projectHome + "src/main/resources/sql/data";
 		this.factory = factory;
 	}

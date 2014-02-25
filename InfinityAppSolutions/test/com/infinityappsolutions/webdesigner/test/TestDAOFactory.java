@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.infinityappsolutions.server.lib.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.dao.IConnectionDriver;
 
-public class TestDAOFactory extends DAOFactory implements IConnectionDriver {
+public class TestDAOFactory extends AbstractDAOFactory implements IConnectionDriver {
 
-	private static DAOFactory testInstance;
+	private static AbstractDAOFactory testInstance;
 
-	public static DAOFactory getTestInstance() {
+	public static AbstractDAOFactory getTestInstance() {
 		if (testInstance == null)
 			testInstance = new TestDAOFactory();
 		return testInstance;

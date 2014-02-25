@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<script type="text/javascript" src="//localhost:8080/includes/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript"
+		src="//localhost:8080/includes/jquery-2.0.3.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
@@ -40,8 +41,7 @@
 
 					<f:facet name="footer">
 						<h:commandButton id="loginButton" value="Login"
-							styleClass="btn btn-primary btn-md"
-							actionListener="#{loginView.login}" />
+							styleClass="btn btn-primary btn-md" action="#{loginView.login}" />
 						<br></br>
 						<br></br>
 						<h:commandButton id="signupButton" value="Create Account"
