@@ -19,7 +19,7 @@
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		var columnCheckBoxClick = function() {
+		var columnCheckBoxClick = function(checkBoxObject) {
 			var checked = $('.columnCheckbox').prop('checked');
 			$('.rowCheckbox').prop('checked', checked);
 		};
@@ -31,18 +31,12 @@
 <h:body>
 	<ui:include page="/includes/nav-bar-main.xhtml"></ui:include>
 	<h:form id="form">
-		<h:panelGrid columns="4" cellpadding="5">
-			<h:commandButton value="Add Term" styleClass="btn btn-default"
-				actionListener="#{generateTermsView.generateEmptyTerm}"
-				update="form:panel"></h:commandButton>
-			<h:commandButton value="Delete" styleClass="btn btn-default"
-				actionListener="#{generateTermsView.deleteTerms}"
-				update="form:panel"></h:commandButton>
-			<h:commandButton value="Save" styleClass="btn btn-default"
-				actionListener="#{generateTermsView.saveTerms}" update="form:panel"></h:commandButton>
-			<h:commandButton value="Advanced Add" styleClass="btn btn-default"
-				action="advancedAdd.xhtml?faces-redirect=true" update="form:panel"></h:commandButton>
-		</h:panelGrid>
+		<p:commandButton value="Add Term"
+			action="#{generateTermsView.generateEmptyTerm}" update="form:panel"></p:commandButton>
+		<p:commandButton value="Delete"
+			actionListener="#{generateTermsView.deleteTerms}" update="form:panel"></p:commandButton>
+		<p:commandButton value="Save"
+			actionListener="#{generateTermsView.saveTerms}" update="form:panel"></p:commandButton>
 		<p:panel id="panel">
 			<table id="table"
 				class="table table-striped .table-bordered .table-condensed">
@@ -59,12 +53,14 @@
 						value="#{generateTermsView.termList}" varStatus="status">
 						<tr>
 
-							<td><h:selectBooleanCheckbox styleClass="rowCheckbox"
-									value="#{generateTermsView.checkedMap[term.id]}">
+							<td><f:selectItem value="#{term}">
+								</f:selectItem> <h:selectBooleanCheckbox styleClass="rowCheckBox">
+
+									<p:ajax listener="#{generateTermsView.selectTerm}" />
 								</h:selectBooleanCheckbox></td>
 							<td><p:inputTextarea rows="1" cols="50" value="#{term.name}"
 									onchange="saveTerm()" /></td>
-							<td><p:inputTextarea rows="2" cols="100"
+							<td><p:inputTextarea rows="1" cols="50"
 									value="#{term.definition}" onchange="saveTerm()" /></td>
 						</tr>
 					</ui:repeat>

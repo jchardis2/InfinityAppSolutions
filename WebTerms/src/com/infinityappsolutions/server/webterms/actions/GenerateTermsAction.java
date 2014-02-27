@@ -48,4 +48,14 @@ public class GenerateTermsAction {
 				.getInstance().getLoggedInUsersOrgContainerBean();
 		liucb.setCurrentOrgUsersBean(oub);
 	}
+
+	public void deleteTerms(ArrayList<Term> terms) throws DBException {
+		TermsDAO termsDAO = new TermsDAO(daoFactory);
+		termsDAO.deleteTerms(terms);
+	}
+
+	public void saveTerms(ArrayList<Term> termList) throws DBException {
+		TermsDAO termsDAO = new TermsDAO(daoFactory);
+		termsDAO.saveTerms(termList);
+	}
 }

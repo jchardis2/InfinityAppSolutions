@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
-import com.infinityappsolutions.server.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
@@ -151,4 +150,61 @@ public class TermsDAO {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param term
+	 *            The term bean representing the term.
+	 * @throws DBException
+	 */
+	public void deleteTerms(ArrayList<Term> terms) throws DBException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = factory.getConnection();
+			for (Term term : terms) {
+				ps = conn
+						.prepareStatement("DELETE FROM `terms`.`terms` WHERE `terms`.`id` = ?  AND `terms`.`ownerid` =?;");
+				ps.setLong(1, term.getId());
+				ps.setLong(2, term.getOwnerId());
+				ps.executeUpdate();
+			}
+
+		} catch (SQLException | NamingException e) {
+
+			throw new DBException(e);
+		} finally {
+			DBUtil.closeConnection(conn, ps);
+		}
+	}
+
+	/**
+	 * Updates a users's information for the given id
+	 * 
+	 * @param ub
+	 *            The user bean representing the new information for the user.
+	 * @throws DBException
+	 */
+	public void saveTerms(ArrayList<Term> terms) throws DBException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = factory.getConnection();
+			for (Term term : terms) {
+				ps = conn
+						.prepareStatement("UPDATE  `terms`.`terms` SET  `id` =?,`name` =?,`definition`=?,`ownerid`=? WHERE  `terms`.`id` =? AND `terms`.`ownerid` =?;");
+				termsLoader.loadParameters(ps, term);
+				int parameterCount = ps.getParameterMetaData()
+						.getParameterCount();
+				ps.setLong(parameterCount - 1, term.getId());
+				ps.setLong(parameterCount, term.getOwnerId());
+				ps.executeUpdate();
+			}
+		} catch (SQLException | NamingException e) {
+
+			throw new DBException(e);
+		} finally {
+			DBUtil.closeConnection(conn, ps);
+		}
+	}
 }
