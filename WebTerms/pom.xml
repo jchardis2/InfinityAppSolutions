@@ -95,6 +95,11 @@
 			<artifactId>infinityappsolutions-server-lib</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>Terms-lib</groupId>
+			<artifactId>Terms-lib</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -142,6 +147,33 @@
 									<overWrite>false</overWrite>
 									<outputDirectory>WEB-INF/classes</outputDirectory>
 									<destFileName>optional-new-name2.jar</destFileName>
+									<includes>**/*.class,**/*.xml</includes>
+									<excludes>**/*test.class</excludes>
+								</artifactItem>
+							</artifactItems>
+							<includes>**/*.java</includes>
+							<excludes>**/*.properties</excludes>
+							<outputDirectory>${project.build.directory}/wars</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+					<execution>
+						<id>unpack-terms-lib</id>
+						<phase>package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>Terms-lib</groupId>
+									<artifactId>Terms-lib</artifactId>
+									<version>0.0.1</version>
+									<type>jar</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>WEB-INF/classes</outputDirectory>
+									<destFileName>terms-lib.jar</destFileName>
 									<includes>**/*.class,**/*.xml</includes>
 									<excludes>**/*test.class</excludes>
 								</artifactItem>

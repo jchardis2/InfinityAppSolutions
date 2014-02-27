@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CellEditEvent;
@@ -14,9 +12,8 @@ import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.webterms.actions.GenerateTermsAction;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
+import com.infinityappsolutions.lib.webterms.Term;
 
-@ViewScoped
-@ManagedBean(name = "termsBean")
 public class TermsBean implements Serializable {
 	private static final long serialVersionUID = 8689077504747301832L;
 	public ArrayList<Term> termsList;

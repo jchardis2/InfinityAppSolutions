@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
+import com.infinityappsolutions.lib.webterms.Term;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
-import com.infinityappsolutions.server.webterms.beans.Term;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
 import com.infinityappsolutions.server.webterms.loaders.TermsLoader;
 

@@ -6,9 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.infinityappsolutions.server.lib.beans.UserBean;
+import com.infinityappsolutions.lib.webterms.Term;
 import com.infinityappsolutions.server.lib.loaders.BeanLoader;
-import com.infinityappsolutions.server.webterms.beans.Term;
 
 /**
  * A loader for TermsBean.

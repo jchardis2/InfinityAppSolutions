@@ -2,10 +2,8 @@ package com.infinityappsolutions.server.webterms.views;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
@@ -16,10 +14,10 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.CellEditEvent;
 
+import com.infinityappsolutions.lib.webterms.Term;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.webterms.actions.GenerateTermsAction;
-import com.infinityappsolutions.server.webterms.beans.Term;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
 
 @ViewScoped
