@@ -57,6 +57,21 @@
 		</init-param>
 	</servlet>
 
+	<servlet>
+		<servlet-name>getTerms</servlet-name>
+		<servlet-class>com.infinityappsolutions.server.webterms.servlet.TermServlet
+		</servlet-class>
+
+		<init-param>
+			<param-name>dirAllowed</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getTerms</servlet-name>
+		<url-pattern>/user/mobile/servlet/getTerms</url-pattern>
+	</servlet-mapping>
+
 	<!-- jsf -->
 	<!-- Change to "Production" when you are ready to deploy -->
 	<context-param>

@@ -95,8 +95,8 @@
 			<version>0.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>Terms-lib</groupId>
-			<artifactId>Terms-lib</artifactId>
+			<groupId>terms-lib</groupId>
+			<artifactId>terms-lib</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
@@ -166,8 +166,8 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>Terms-lib</groupId>
-									<artifactId>Terms-lib</artifactId>
+									<groupId>terms-lib</groupId>
+									<artifactId>terms-lib</artifactId>
 									<version>0.0.1</version>
 									<type>jar</type>
 									<overWrite>false</overWrite>
