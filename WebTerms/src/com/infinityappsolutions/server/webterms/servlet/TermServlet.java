@@ -18,3 +18,4 @@ public class TermServlet extends HttpServlet {
 				"session=" + request.getSession(true).getId());
 	}
 }
+ 
