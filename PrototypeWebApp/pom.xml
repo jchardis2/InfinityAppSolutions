@@ -7,7 +7,7 @@
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<finalName>JettyServer</finalName>
-		<directory>target</directory>
+		<directory>target</directory> 
 		<outputDirectory>./WebContent/WEB-INF/classes</outputDirectory>
 		<plugins>
 			<plugin>
@@ -103,6 +103,11 @@
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>infinityappsolutions-lib</groupId>
+			<artifactId>infinityappsolutions-lib</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
 </project>
