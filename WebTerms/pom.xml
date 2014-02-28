@@ -89,7 +89,6 @@
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>infinityappsolutions-server-lib</groupId>
 			<artifactId>infinityappsolutions-server-lib</artifactId>

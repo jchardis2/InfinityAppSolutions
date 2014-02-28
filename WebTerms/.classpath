@@ -17,7 +17,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions-server-lib"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.2 (Mojarra 2.2.0)">
@@ -26,5 +25,7 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions.server.lib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions.webterms.lib"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
