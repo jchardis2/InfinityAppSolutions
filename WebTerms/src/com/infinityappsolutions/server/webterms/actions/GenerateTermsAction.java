@@ -2,7 +2,7 @@ package com.infinityappsolutions.server.webterms.actions;
 
 import java.util.ArrayList;
 
-import com.infinityappsolutions.lib.webterms.Term;
+import com.infinityappsolutions.lib.webterms.bean.Term;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.beans.LoggedInUsersOrgContainerBean;
 import com.infinityappsolutions.server.lib.beans.OrgUserBean;

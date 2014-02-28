@@ -1,4 +1,4 @@
-package com.infinityappsolutions.lib.webterms;
+package com.infinityappsolutions.lib.webterms.bean;
 
 public class Term {
 	public Long id;

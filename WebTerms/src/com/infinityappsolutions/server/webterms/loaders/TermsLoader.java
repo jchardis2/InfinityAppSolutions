@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.infinityappsolutions.lib.webterms.Term;
+import com.infinityappsolutions.lib.webterms.bean.Term;
 import com.infinityappsolutions.server.lib.loaders.BeanLoader;
 
 /**

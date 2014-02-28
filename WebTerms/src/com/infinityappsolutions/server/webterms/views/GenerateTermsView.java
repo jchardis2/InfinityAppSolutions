@@ -14,7 +14,7 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.CellEditEvent;
 
-import com.infinityappsolutions.lib.webterms.Term;
+import com.infinityappsolutions.lib.webterms.bean.Term;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.webterms.actions.GenerateTermsAction;

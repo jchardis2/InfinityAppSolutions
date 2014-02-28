@@ -12,7 +12,7 @@ import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.webterms.actions.GenerateTermsAction;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
-import com.infinityappsolutions.lib.webterms.Term;
+import com.infinityappsolutions.lib.webterms.bean.Term;
 
 public class TermsBean implements Serializable {
 	private static final long serialVersionUID = 8689077504747301832L;

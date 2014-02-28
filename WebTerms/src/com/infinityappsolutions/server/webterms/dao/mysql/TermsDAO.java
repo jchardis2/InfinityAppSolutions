@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
-import com.infinityappsolutions.lib.webterms.Term;
+import com.infinityappsolutions.lib.webterms.bean.Term;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
