@@ -17,6 +17,7 @@ import org.primefaces.event.CellEditEvent;
 import com.infinityappsolutions.lib.webterms.bean.Term;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
+import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.webterms.actions.GenerateTermsAction;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
 
@@ -52,7 +53,9 @@ public class GenerateTermsView implements Serializable {
 		GenerateTermsAction generateTermsAction = new GenerateTermsAction(
 				DAOFactory.getProductionInstance());
 		try {
-			termList = generateTermsAction.generateTermList();
+			termList = generateTermsAction
+					.generateTermList(IASRootFacesProvider.getInstance()
+							.getLoggedInUserBean());
 			return termList;
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
@@ -70,7 +73,8 @@ public class GenerateTermsView implements Serializable {
 				DAOFactory.getProductionInstance());
 
 		try {
-			generateTermsAction.saveTerm(getSelectedTerm());
+			generateTermsAction.saveTerm(getSelectedTerm(),
+					IASRootFacesProvider.getInstance().getLoggedInUserBean());
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +86,8 @@ public class GenerateTermsView implements Serializable {
 				DAOFactory.getProductionInstance());
 
 		try {
-			generateTermsAction.generateEmptyTerm();
+			generateTermsAction.generateEmptyTerm(IASRootFacesProvider
+					.getInstance().getLoggedInUserBean());
 			generateTerms();
 		} catch (DBException e) {
 			// TODO Auto-generated catch block

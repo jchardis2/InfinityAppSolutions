@@ -20,23 +20,18 @@ public class GenerateTermsAction {
 		this.daoFactory = daoFactory;
 	}
 
-	public ArrayList<Term> generateTermList() throws DBException, IASException {
-		LoggedInUserBean liub = IASRootFacesProvider.getInstance()
-				.getLoggedInUserBean();
+	public ArrayList<Term> generateTermList(LoggedInUserBean liub)
+			throws DBException, IASException {
 		TermsDAO termsDAO = new TermsDAO(daoFactory);
 		return termsDAO.getTermsByOwner(liub.getId());
 	}
 
-	public void saveTerm(Term term) throws DBException {
-		LoggedInUserBean liub = IASRootFacesProvider.getInstance()
-				.getLoggedInUserBean();
+	public void saveTerm(Term term, LoggedInUserBean liub) throws DBException {
 		TermsDAO termsDAO = new TermsDAO(daoFactory);
-		termsDAO.editTerm(term);
+		termsDAO.editTerm(term, liub);
 	}
 
-	public void generateEmptyTerm() throws DBException {
-		LoggedInUserBean liub = IASRootFacesProvider.getInstance()
-				.getLoggedInUserBean();
+	public void generateEmptyTerm(LoggedInUserBean liub) throws DBException {
 		TermsDAO termsDAO = new TermsDAO(daoFactory);
 		termsDAO.insertTerm(new Term(0L, "", "", liub.getId()));
 	}
@@ -56,4 +51,5 @@ public class GenerateTermsAction {
 		TermsDAO termsDAO = new TermsDAO(daoFactory);
 		termsDAO.saveTerms(termList);
 	}
+
 }

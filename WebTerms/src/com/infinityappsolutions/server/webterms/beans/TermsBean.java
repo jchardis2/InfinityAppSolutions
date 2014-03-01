@@ -12,6 +12,7 @@ import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.webterms.actions.GenerateTermsAction;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
+import com.infinityappsolutions.server.webterms.faces.FacesProvider;
 import com.infinityappsolutions.lib.webterms.bean.Term;
 
 public class TermsBean implements Serializable {
@@ -45,7 +46,8 @@ public class TermsBean implements Serializable {
 		GenerateTermsAction generateTermsAction = new GenerateTermsAction(
 				DAOFactory.getProductionInstance());
 		try {
-			termsList = generateTermsAction.generateTermList();
+			termsList = generateTermsAction.generateTermList(FacesProvider
+					.getInstance().getLoggedInUserBean());
 			return termsList;
 		} catch (DBException e) {
 			// TODO Auto-generated catch block

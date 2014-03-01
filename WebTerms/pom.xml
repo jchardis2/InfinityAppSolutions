@@ -95,6 +95,11 @@
 			<version>0.0.1</version>
 		</dependency>
 		<dependency>
+			<groupId>infinityappsolutions-lib</groupId>
+			<artifactId>infinityappsolutions-lib</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
 			<groupId>terms-lib</groupId>
 			<artifactId>terms-lib</artifactId>
 			<version>0.0.1</version>

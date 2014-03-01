@@ -66,6 +66,7 @@ public class IASRootLoginAction {
 	 *            the password to be checked
 	 * @param request
 	 *            the request to be used to login
+	 * @return
 	 * @throws ServletException
 	 *             - if the configured login mechanism does not support username
 	 *             password authentication, or if a non-null caller identity had
@@ -73,12 +74,22 @@ public class IASRootLoginAction {
 	 *             validation of the provided username and password fails
 	 * @throws DBException
 	 */
-	public void login(String username, String password,
+	public LoggedInUserBean login(String username, String password,
 			HttpServletRequest request, LoggedInUserBean loggedInUserBean)
 			throws ServletException, DBException {
 		request.login(username, password);
 		UserDAO userDAO = new UserDAO(daoFactory);
-		userDAO.getUserByCredentials(username, password, loggedInUserBean);
+		loggedInUserBean = (LoggedInUserBean) userDAO.getUserByCredentials(
+				username, password, loggedInUserBean);
+		if (loggedInUserBean != null && loggedInUserBean.getId() != null
+				&& loggedInUserBean.getUsername() != null) {
+			request.getSession().setAttribute(
+					System.getProperty("user.username"),
+					loggedInUserBean.getUsername());
+			request.getSession().setAttribute(System.getProperty("user.id"),
+					loggedInUserBean.getId());
+		}
+		return loggedInUserBean;
 	}
 
 	public void logout(HttpServletRequest request) throws ServletException {

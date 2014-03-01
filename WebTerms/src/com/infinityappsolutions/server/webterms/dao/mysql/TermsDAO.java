@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.naming.NamingException;
 
 import com.infinityappsolutions.lib.webterms.bean.Term;
+import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
@@ -106,7 +107,7 @@ public class TermsDAO {
 	 *            The user bean representing the new information for the user.
 	 * @throws DBException
 	 */
-	public void editTerm(Term term) throws DBException {
+	public void editTerm(Term term, LoggedInUserBean liub) throws DBException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -116,7 +117,7 @@ public class TermsDAO {
 			termsLoader.loadParameters(ps, term);
 			int parameterCount = ps.getParameterMetaData().getParameterCount();
 			ps.setLong(parameterCount - 1, term.getId());
-			ps.setLong(parameterCount, term.getOwnerId());
+			ps.setLong(parameterCount, liub.getId());
 			ps.executeUpdate();
 		} catch (SQLException | NamingException e) {
 
