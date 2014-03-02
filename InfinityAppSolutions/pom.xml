@@ -95,6 +95,11 @@
 			<artifactId>infinityappsolutions-server-lib</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>infinityappsolutions.lib</groupId>
+			<artifactId>infinityappsolutions.lib</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>

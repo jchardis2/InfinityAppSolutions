@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.infinityappsolutions.server.lib.beans.UserBean;
+import com.infinityappsolutions.lib.beans.UserBean;
 
 /**
  * A loader for UserBeans.

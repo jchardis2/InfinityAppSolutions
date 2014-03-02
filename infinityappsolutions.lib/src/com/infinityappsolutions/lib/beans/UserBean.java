@@ -1,12 +1,7 @@
-package com.infinityappsolutions.server.lib.beans;
+package com.infinityappsolutions.lib.beans;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
-@SessionScoped
-@ManagedBean(name = "userBean")
 public class UserBean implements Serializable {
 	private static final long serialVersionUID = 7960007753183774817L;
 	protected Long id;
@@ -19,7 +14,8 @@ public class UserBean implements Serializable {
 	public UserBean() {
 	}
 
-	public UserBean(Long id, String username, String email, String password, String firstname, String lastname) {
+	public UserBean(Long id, String username, String email, String password,
+			String firstname, String lastname) {
 	}
 
 	public Long getId() {

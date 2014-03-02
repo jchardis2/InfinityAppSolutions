@@ -20,7 +20,7 @@ import com.infinityappsolutions.server.webterms.dao.DAOFactory;
 
 @SessionScoped
 @ManagedBean(name = "loginView")
-public class LoginView implements Serializable {
+public class LoginView extends AbstractView implements Serializable {
 	private static final long serialVersionUID = 8037321240967773536L;
 	private String username;
 	private String email;
@@ -73,13 +73,16 @@ public class LoginView implements Serializable {
 			LoggedInUserBean liub = IASRootFacesProvider.getInstance()
 					.getLoggedInUserBean();
 			action.login(username, password, request, liub);
-			context.getExternalContext().redirect("user/home.xhtml");
-			return "user/home.xhtml?faces-redirect=true";
+			context.getExternalContext().redirect(
+					BASE_DIRECTORY + "/user/home.xhtml");
+			// return "user/home.xhtml?faces-redirect=true";
+			return null;
 		} catch (ServletException e) {
 			e.printStackTrace();
 			context.addMessage(null, new FacesMessage("Login failed."));
 			try {
-				context.getExternalContext().redirect("/login-error.xhtml");
+				context.getExternalContext().redirect(
+						BASE_DIRECTORY + "/login-error.xhtml");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -113,7 +116,8 @@ public class LoginView implements Serializable {
 			IASRootLoginAction action = new IASRootLoginAction(
 					DAOFactory.getProductionInstance());
 			action.logout(request);
-			context.getExternalContext().redirect("/login.xhtml");
+			context.getExternalContext().redirect(
+					BASE_DIRECTORY + "/login.xhtml");
 			return "";
 		} catch (ServletException e) {
 			e.printStackTrace();

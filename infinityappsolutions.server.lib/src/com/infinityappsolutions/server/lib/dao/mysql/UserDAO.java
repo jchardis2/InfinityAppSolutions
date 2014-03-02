@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import com.infinityappsolutions.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
-import com.infinityappsolutions.server.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;

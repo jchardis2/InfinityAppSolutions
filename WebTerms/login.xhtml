@@ -27,21 +27,20 @@
 		<div class="jumbotron" style="margin-top: 20%">
 			<h1>Terms</h1>
 			​
-			<h:form prependId="false">
+			<h:form id="ias_login_form" prependId="false">
 				<p:focus context="panel" />
 				<h:panelGrid id="panel" columns="2" cellpadding="5">
-					<h:outputLabel for="wd_username" value="Username:" />
-					<p:inputText value="#{loginView.username}" id="wd_username"
+					<h:outputLabel for="username" value="Username:" />
+					<p:inputText value="#{loginView.username}" id="username"
 						required="true" label="username" />
 
-					<h:outputLabel for="wd_password" value="Password:" />
-					<p:password value="#{loginView.password}" id="wd_password"
+					<h:outputLabel for="password" value="Password:" />
+					<p:password value="#{loginView.password}" id="password"
 						required="true" label="password" />
 
 					<f:facet name="footer">
 						<h:commandButton id="loginButton" value="Login"
-							styleClass="btn btn-primary btn-md"
-							action="#{loginView.login}" />
+							styleClass="btn btn-primary btn-md" action="#{loginView.login}" />
 						<br></br>
 						<br></br>
 						<h:commandButton id="signupButton" value="Create Account"

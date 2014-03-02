@@ -89,6 +89,7 @@ public class IASRootLoginAction {
 			request.getSession().setAttribute(System.getProperty("user.id"),
 					loggedInUserBean.getId());
 		}
+		loggedInUserBean.setPassword(null);
 		return loggedInUserBean;
 	}
 

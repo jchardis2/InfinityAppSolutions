@@ -3,6 +3,8 @@ package com.infinityappsolutions.server.lib.beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.infinityappsolutions.lib.beans.UserBean;
+
 @SessionScoped
 @ManagedBean(name = "adminBean")
 public class AdminBean extends UserBean {

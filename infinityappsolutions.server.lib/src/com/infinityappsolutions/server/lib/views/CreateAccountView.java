@@ -5,8 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import com.infinityappsolutions.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.actions.IASRootCreateAccountAction;
-import com.infinityappsolutions.server.lib.beans.UserBean;
 import com.infinityappsolutions.server.lib.dao.AbstractDAOFactory;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.log.Logger;
