@@ -8,7 +8,7 @@ public class UserBean implements Serializable {
 	protected String username;
 	protected String email;
 	protected String password;
-	protected String firstname;
+	protected String firstname; 
 	protected String lastname;
 
 	public UserBean() {

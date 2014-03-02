@@ -133,8 +133,6 @@
 						<configuration>
 							<includeGroupIds>infinityappsolutions-server-lib</includeGroupIds>
 							<outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
-							<includeGroupIds>infinityappsolutions-lib</includeGroupIds>
-							<outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -145,17 +143,6 @@
 						</goals>
 						<configuration>
 							<artifactItems>
-								<artifactItem>
-									<groupId>terms-lib</groupId>
-									<artifactId>terms-lib</artifactId>
-									<version>0.0.1</version>
-									<type>jar</type>
-									<overWrite>false</overWrite>
-									<outputDirectory>WEB-INF/classes</outputDirectory>
-									<destFileName>terms-lib.jar</destFileName>
-									<includes>**/*.class,**/*.xml</includes>
-									<excludes>**/*test.class</excludes>
-								</artifactItem>
 								<artifactItem>
 									<groupId>infinityappsolutions-server-lib</groupId>
 									<artifactId>infinityappsolutions-server-lib</artifactId>
@@ -178,7 +165,17 @@
 									<includes>**/*.class,**/*.xml</includes>
 									<excludes>**/*test.class</excludes>
 								</artifactItem>
-
+								<artifactItem>
+									<groupId>terms-lib</groupId>
+									<artifactId>terms-lib</artifactId>
+									<version>0.0.1</version>
+									<type>jar</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>WEB-INF/classes</outputDirectory>
+									<destFileName>terms-lib.jar</destFileName>
+									<includes>**/*.class,**/*.xml</includes>
+									<excludes>**/*test.class</excludes>
+								</artifactItem>
 							</artifactItems>
 							<includes>**/*.java</includes>
 							<excludes>**/*.properties</excludes>
