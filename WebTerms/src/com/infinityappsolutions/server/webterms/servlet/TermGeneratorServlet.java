@@ -14,10 +14,8 @@ import com.infinityappsolutions.lib.webterms.bean.Term;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
-import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.webterms.actions.GenerateTermsAction;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
-import com.infinityappsolutions.server.webterms.faces.FacesProvider;
 
 public class TermGeneratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1458278335635638361L;
@@ -35,7 +33,7 @@ public class TermGeneratorServlet extends HttpServlet {
 		GenerateTermsAction action = new GenerateTermsAction(
 				DAOFactory.getProductionInstance());
 		try {
-			ArrayList<Term> termList = action.generateTermList(liub);
+			ArrayList<Term> termList = action.generateTermList(liub); 
 			IASGson<ArrayList<Term>> iasGson = new IASGson<>();
 			String jsonTermList = iasGson.toGson(termList);
 			response.setContentType("text/html");

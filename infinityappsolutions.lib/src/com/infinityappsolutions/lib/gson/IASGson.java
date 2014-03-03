@@ -1,4 +1,4 @@
-package com.infinityappsolutions.lib;
+package com.infinityappsolutions.lib.gson;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
