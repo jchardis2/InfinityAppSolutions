@@ -20,6 +20,8 @@ public class TermHomeServlet extends AbstractTermsServlet {
 				.getAttribute("loggedInUserBean");
 		IASGson<LoggedInUserBean> iasGson = new IASGson<>();
 		String liubGsonString = iasGson.toGson(liub);
+		String requestURI = request.getRequestURI();
+		response.setHeader("Location", requestURI);
 		response.getWriter().write(liubGsonString);
 	}
 }
