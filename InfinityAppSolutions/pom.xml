@@ -4,7 +4,7 @@
 	<groupId>InfinityAppSolutions</groupId>
 	<artifactId>InfinityAppSolutions</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<repositories>
 		<repository>
 			<id>java.net.m2</id>
@@ -83,11 +83,13 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.29</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -113,6 +115,20 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<webXml>WEB-INF/web.xml</webXml>
+					<outputDirectory>/home/jchardis/git/InfinityAppSolutions/webapps</outputDirectory>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
 				</configuration>
 			</plugin>
 			<plugin>

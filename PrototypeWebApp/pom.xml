@@ -1,12 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>JettyServer</groupId>
-	<artifactId>JettyServer</artifactId>
+	<groupId>PrototypeWebApp</groupId>
+	<artifactId>PrototypeWebApp</artifactId>
 	<version>0.0.1</version>
+	<packaging>war</packaging>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<finalName>JettyServer</finalName>
+		<finalName>PrototypeWebApp</finalName>
 		<directory>target</directory>
 		<outputDirectory>./WebContent/WEB-INF/classes</outputDirectory>
 		<plugins>
@@ -16,6 +17,20 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<webXml>WEB-INF/web.xml</webXml>
+					<outputDirectory>/home/jchardis/git/InfinityAppSolutions/webapps</outputDirectory>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>

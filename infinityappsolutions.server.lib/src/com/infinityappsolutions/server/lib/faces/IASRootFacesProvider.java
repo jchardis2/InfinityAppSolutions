@@ -42,7 +42,7 @@ public class IASRootFacesProvider {
 	 * @return The logged in Admin Bean
 	 */
 	public LoggedInAdminBean getLoggedInAdminBean() {
-		return (LoggedInAdminBean) FacesContext
+		LoggedInAdminBean liab = (LoggedInAdminBean) FacesContext
 				.getCurrentInstance()
 				.getApplication()
 				.getExpressionFactory()
@@ -50,6 +50,11 @@ public class IASRootFacesProvider {
 						FacesContext.getCurrentInstance().getELContext(),
 						"#{loggedInAdminBean}", LoggedInAdminBean.class)
 				.getValue(FacesContext.getCurrentInstance().getELContext());
+		if (liab == null) {
+			liab = new LoggedInAdminBean();
+			setLoggedInAdminBean(liab);
+		}
+		return liab;
 	}
 
 	/**
@@ -57,7 +62,7 @@ public class IASRootFacesProvider {
 	 * @return The logged in User Bean
 	 */
 	public LoggedInUserBean getLoggedInUserBean() {
-		return (LoggedInUserBean) FacesContext
+		LoggedInUserBean liub = (LoggedInUserBean) FacesContext
 				.getCurrentInstance()
 				.getApplication()
 				.getExpressionFactory()
@@ -65,6 +70,11 @@ public class IASRootFacesProvider {
 						FacesContext.getCurrentInstance().getELContext(),
 						"#{loggedInUserBean}", LoggedInUserBean.class)
 				.getValue(FacesContext.getCurrentInstance().getELContext());
+		if (liub == null) {
+			liub = new LoggedInUserBean();
+			setLoggedInUserBean(liub);
+		}
+		return liub;
 	}
 
 	/**
@@ -72,7 +82,7 @@ public class IASRootFacesProvider {
 	 * @return The OrgUserBean
 	 */
 	public LoggedInUsersOrgContainerBean getLoggedInUsersOrgContainerBean() {
-		return (LoggedInUsersOrgContainerBean) FacesContext
+		LoggedInUsersOrgContainerBean liuocb = (LoggedInUsersOrgContainerBean) FacesContext
 				.getCurrentInstance()
 				.getApplication()
 				.getExpressionFactory()
@@ -81,6 +91,27 @@ public class IASRootFacesProvider {
 						"#{loggedInUsersOrgContainerBean}",
 						LoggedInUsersOrgContainerBean.class)
 				.getValue(FacesContext.getCurrentInstance().getELContext());
+		if (liuocb == null) {
+			liuocb = new LoggedInUsersOrgContainerBean();
+			setLoggedInUsersOrgContainerBean(liuocb);
+		}
+		return liuocb;
+	}
+
+	public Object setLoggedInUserBean(LoggedInUserBean liub) {
+		return FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().put("loggedInUserBean", liub);
+	}
+
+	public Object setLoggedInAdminBean(LoggedInAdminBean liab) {
+		return FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().put("loggedInAdminBean", liab);
+	}
+
+	public Object setLoggedInUsersOrgContainerBean(
+			LoggedInUsersOrgContainerBean liuocb) {
+		return FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().put("loggedInUsersOrgContainerBean", liuocb);
 	}
 
 }

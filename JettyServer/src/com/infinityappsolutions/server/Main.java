@@ -140,6 +140,8 @@ public class Main {
 
 		webbapp_home = System.getProperty("webapp.home", null);
 		jetty_base = System.getProperty("jetty.home", null);
+		System.out.println("WebAppHome: " + webbapp_home);
+		System.out.println("JettyHome: " + jetty_home);
 
 	}
 }

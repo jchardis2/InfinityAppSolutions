@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="infinityappsolutions.server.lib" basedir=".">
+	 <property name="project.name" value="infinityappsolutions.server.lib"/>
 	<property name="src.dir" value="src" />
 
 	<property name="build.dir" value="build" />

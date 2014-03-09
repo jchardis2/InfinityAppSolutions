@@ -48,3 +48,11 @@ fi
 
 
 
+cd /home/jchardis/git/InfinityAppSolutions/WebDesigner
+mvn clean install
+
+if [ "$?" != "0" ]; then
+        echo "Error. Building halted."
+        exit 1
+fi
+

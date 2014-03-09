@@ -43,7 +43,7 @@
 		<link>
 			<name>WebTerms.xml</name>
 			<type>1</type>
-			<location>/home/jchardis/git/InfinityAppSolutions/WebTerms.xml</location>
+			<location>/home/jchardis/git/InfinityAppSolutions/webapps/WebTerms.xml</location>
 		</link>
 	</linkedResources>
 </projectDescription>

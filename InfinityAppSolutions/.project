@@ -43,7 +43,7 @@
 		<link>
 			<name>InfinityAppSolutions.xml</name>
 			<type>1</type>
-			<location>/home/jchardis/git/InfinityAppSolutions/InfinityAppSolutions.xml</location>
+			<location>/home/jchardis/git/InfinityAppSolutions/webapps/InfinityAppSolutions.xml</location>
 		</link>
 	</linkedResources>
 </projectDescription>

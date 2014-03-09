@@ -6,19 +6,19 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.infinityappsolutions.server.dao.DAOFactory;
+import com.infinityappsolutions.server.faces.FacesProvider;
 import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
-@SessionScoped
+@ViewScoped
 @ManagedBean(name = "loginView")
 public class LoginView implements Serializable {
 	private static final long serialVersionUID = 8037321240967773536L;
@@ -70,11 +70,11 @@ public class LoginView implements Serializable {
 		try {
 			SecureHashUtil hashUtil = new SecureHashUtil();
 			password = hashUtil.sha256Hash((String) password);
-			LoggedInUserBean liub = IASRootFacesProvider.getInstance()
+			LoggedInUserBean liub = FacesProvider.getInstance()
 					.getLoggedInUserBean();
 			action.login(username, password, request, liub);
-			context.getExternalContext().redirect("user/home.xhtml");
-			return "user/home.xhtml?faces-redirect=true";
+			context.getExternalContext().redirect("/user/home.xhtml");
+			return null;
 		} catch (ServletException e) {
 			e.printStackTrace();
 			context.addMessage(null, new FacesMessage("Login failed."));

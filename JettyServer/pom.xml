@@ -4,6 +4,12 @@
 	<groupId>JettyServer</groupId>
 	<artifactId>JettyServer</artifactId>
 	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<properties>
+		<ias.ouputdir>/home/jchardis/git/InfinityAppSolutions/bin</ias.ouputdir>
+		<ias.ouputdir.lib>/home/jchardis/git/InfinityAppSolutions/bin/dependency-jars</ias.ouputdir.lib>
+	</properties>
+
 	<repositories>
 		<repository>
 			<id>java.net.m2</id>
@@ -19,6 +25,15 @@
 	</repositories>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>${ias.ouputdir}</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>config.properties</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -28,15 +43,44 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<outputDirectory>${ias.ouputdir}</outputDirectory>
+					<archive>
+						<manifest>
+							<mainClass>com.infinityappsolutions.server.Main</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>dependency-jars/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.1.0.M0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
-		<plugin>
-			<artifactId>maven-war-plugin</artifactId>
-			<version>2.3</version>
-			<configuration>
-				<warSourceDirectory>WebContent</warSourceDirectory>
-				<failOnMissingWebXml>false</failOnMissingWebXml>
-			</configuration>
-		</plugin>
 	</build>
 	<dependencies>
 		<dependency>
