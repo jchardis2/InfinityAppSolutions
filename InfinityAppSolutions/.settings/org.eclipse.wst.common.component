@@ -8,6 +8,9 @@
         <dependent-module archiveName="infinityappsolutions-server-lib-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/infinityappsolutions.server.lib/infinityappsolutions.server.lib">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="infinityappsolutions-lib-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/infinityappsolutions.lib/infinityappsolutions.lib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="InfinityAppSolutions"/>
         <property name="java-output-path" value="/InfinityAppSolutions/WEB-INF/classes"/>
     </wb-module>
