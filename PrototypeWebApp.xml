@@ -8,9 +8,9 @@
 
 	<Set name="contextPath">/proto</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="." />/PrototypeWebApp
+		<Property name="jetty.webapps" default="." />/PrototypeWebApp/target/PrototypeWebApp
 	</Set>
-	<Set name="extractWAR">false</Set>
+	<Set name="extractWAR">true</Set>
 
 	<Set name="securityHandler">
 		<New class="org.eclipse.jetty.security.ConstraintSecurityHandler">

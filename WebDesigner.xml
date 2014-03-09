@@ -8,9 +8,9 @@
 
 	<Set name="contextPath">/webdesigner</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="." />/WebDesigner
+		<Property name="jetty.webapps" default="." />/WebDesigner/target/WebDesigner
 	</Set>
-	<Set name="extractWAR">false</Set>
+	<Set name="extractWAR">true</Set>
 
 	<Set name="securityHandler">
 		<New class="org.eclipse.jetty.security.ConstraintSecurityHandler">

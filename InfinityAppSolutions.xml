@@ -8,7 +8,7 @@
 
 	<Set name="contextPath">/</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="." />/InfinityAppSolutions.war
+		<Property name="jetty.webapps" default="." />/InfinityAppSolutions/target/InfinityAppSolutions
 	</Set>
 	<Set name="extractWAR">true</Set>
 

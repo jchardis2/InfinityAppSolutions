@@ -14,11 +14,11 @@ import com.infinityappsolutions.server.lib.dao.DBUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
-import com.infinityappsolutions.server.webterms.loaders.TermsLoader;
+import com.infinityappsolutions.server.webterms.loaders.VideoLoader;
 
 public class TermsDAO {
 	private DAOFactory factory;
-	private TermsLoader termsLoader;
+	private VideoLoader videoLoader;
 
 	/**
 	 * The typical constructor.
@@ -29,7 +29,7 @@ public class TermsDAO {
 	 */
 	public TermsDAO(DAOFactory factory) {
 		this.factory = factory;
-		this.termsLoader = new TermsLoader();
+		this.videoLoader = new VideoLoader();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class TermsDAO {
 			ResultSet rs;
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				Term term = termsLoader.loadSingle(rs);
+				Term term = videoLoader.loadSingle(rs);
 				rs.close();
 				ps.close();
 				return term;
@@ -89,7 +89,7 @@ public class TermsDAO {
 			ps.setLong(1, id);
 			ResultSet rs;
 			rs = ps.executeQuery();
-			ArrayList<Term> term = (ArrayList<Term>) termsLoader.loadList(rs);
+			ArrayList<Term> term = (ArrayList<Term>) videoLoader.loadList(rs);
 			rs.close();
 			ps.close();
 			return term;
@@ -114,7 +114,7 @@ public class TermsDAO {
 			conn = factory.getConnection();
 			ps = conn
 					.prepareStatement("UPDATE  `terms`.`terms` SET  `id` =?,`name` =?,`definition`=?,`ownerid`=? WHERE  `terms`.`id` =? AND `terms`.`ownerid` =?;");
-			termsLoader.loadParameters(ps, term);
+			videoLoader.loadParameters(ps, term);
 			int parameterCount = ps.getParameterMetaData().getParameterCount();
 			ps.setLong(parameterCount - 1, term.getId());
 			ps.setLong(parameterCount, liub.getId());
@@ -141,7 +141,7 @@ public class TermsDAO {
 			conn = factory.getConnection();
 			ps = conn
 					.prepareStatement("INSERT INTO  `terms`.`terms` (`id` ,`name` ,`definition` ,`ownerid`)VALUES (? ,  ?,  ?,  ?);");
-			termsLoader.loadParameters(ps, term);
+			videoLoader.loadParameters(ps, term);
 			ps.executeUpdate();
 		} catch (SQLException | NamingException e) {
 
@@ -194,7 +194,7 @@ public class TermsDAO {
 			for (Term term : terms) {
 				ps = conn
 						.prepareStatement("UPDATE  `terms`.`terms` SET  `id` =?,`name` =?,`definition`=?,`ownerid`=? WHERE  `terms`.`id` =? AND `terms`.`ownerid` =?;");
-				termsLoader.loadParameters(ps, term);
+				videoLoader.loadParameters(ps, term);
 				int parameterCount = ps.getParameterMetaData()
 						.getParameterCount();
 				ps.setLong(parameterCount - 1, term.getId());
