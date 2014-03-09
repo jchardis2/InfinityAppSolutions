@@ -16,13 +16,13 @@
 		<New class="org.eclipse.jetty.security.ConstraintSecurityHandler">
 			<Set name="loginService">
 				<New class="org.eclipse.jetty.jaas.JAASLoginService">
-					<Set name="name">jdbc</Set>
-					<Set name="loginModuleName">jdbc</Set>
+					<Set name="name">jdbc-terms</Set>
+					<Set name="loginModuleName">jdbc-terms</Set>
 				</New>
 			</Set>
 		</New>
 	</Set>
-	<New id="terms" class="org.eclipse.jetty.plus.jndi.Resource">
+	<New id="jdbc-terms" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg></Arg>
 		<Arg>jdbc/terms</Arg>
 		<Arg>
