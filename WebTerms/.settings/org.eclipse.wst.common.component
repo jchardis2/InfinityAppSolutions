@@ -11,7 +11,7 @@
         <dependent-module archiveName="infinityappsolutions-lib-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/infinityappsolutions.lib/infinityappsolutions.lib">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="terms-lib-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/infinityappsolutions.webterms.lib/infinityappsolutions.webterms.lib">
+        <dependent-module archiveName="terms-lib-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/infinityappsolutions.lib.webterms/infinityappsolutions.lib.webterms">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="WebTerms"/>

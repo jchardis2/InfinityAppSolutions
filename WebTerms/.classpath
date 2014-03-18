@@ -24,7 +24,7 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions.webterms.lib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions.lib.webterms"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions.lib"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
