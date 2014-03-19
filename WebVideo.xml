@@ -8,7 +8,7 @@
 
 	<Set name="contextPath">/webvideo</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="." />/WebVideo/target/WebVideo
+		<Property name="jetty.webapps" default="."/>/WebVideo
 	</Set>
 	<Set name="extractWAR">true</Set>
 

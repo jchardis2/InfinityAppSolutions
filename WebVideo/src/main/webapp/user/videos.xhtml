@@ -42,11 +42,11 @@
 	<h:form id="form" prependId="false">
 		<h:panelGrid columns="4" cellpadding="5">
 			<h:commandButton value="Add Video" styleClass="btn btn-default"
-				actionListener="#{videoView.generateEmptyVideo}" update="form:panel"></h:commandButton>
+				actionListener="#{serverVideoView.generateEmptyVideo}" update="form:panel"></h:commandButton>
 			<h:commandButton value="Delete" styleClass="btn btn-default"
-				actionListener="#{videoView.deleteVideos}" update="form:panel"></h:commandButton>
+				actionListener="#{serverVideoView.deleteVideos}" update="form:panel"></h:commandButton>
 			<h:commandButton value="Save" styleClass="btn btn-default"
-				actionListener="#{videoView.saveVideos}" update="form:panel"></h:commandButton>
+				actionListener="#{serverVideoView.saveVideos}" update="form:panel"></h:commandButton>
 			<h:commandButton value="Advanced Add" styleClass="btn btn-default"
 				action="advancedAdd.xhtml?faces-redirect=true" update="form:panel"></h:commandButton>
 		</h:panelGrid>
@@ -63,11 +63,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<ui:repeat id="updater" var="video" value="#{videoView.videoList}"
+					<ui:repeat id="updater" var="video" value="#{serverVideoView.videoList}"
 						varStatus="status">
 						<tr>
 							<td><h:selectBooleanCheckbox styleClass="rowCheckbox"
-									value="#{videoView.checkedMap[video.id]}">
+									value="#{serverVideoView.checkedMap[video.id]}">
 								</h:selectBooleanCheckbox></td>
 							<td><h:inputTextarea rows="1" cols="50"
 									value="#{video.name}" /></td>

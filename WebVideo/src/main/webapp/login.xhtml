@@ -4,8 +4,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<script type="text/javascript" src="/includes/jquery-2.0.3.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script type="text/javascript"
+		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<link rel="stylesheet"
+		href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
@@ -25,7 +29,7 @@
 <h:body>
 	<div class="container">
 		<div class="jumbotron" style="margin-top: 20%">
-			<h1>​Web Video</h1>
+			<h1>Web Video</h1>
 			​
 			<h:form prependId="false">
 				<p:focus context="panel" />
@@ -40,12 +44,11 @@
 
 					<f:facet name="footer">
 						<h:commandButton id="loginButton" value="Login"
-							styleClass="btn btn-primary btn-md"
-							action="#{loginView.login}" />
+							styleClass="btn btn-primary btn-md" action="#{loginView.login}" />
 						<br></br>
 						<br></br>
 						<h:commandButton id="signupButton" value="Create Account"
-							styleClass="btn btn-primary btn-md" action="webvideo/createAccount.xhtml" />
+							styleClass="btn btn-primary btn-md" action="createAccount.xhtml" />
 					</f:facet>
 				</h:panelGrid>
 			</h:form>

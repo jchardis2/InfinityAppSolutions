@@ -8,7 +8,7 @@
 
 	<Set name="contextPath">/terms</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="." />/WebTerms/target/WebTerms
+		<Property name="jetty.webapps" default="." />/WebTerms
 	</Set>
 	<Set name="extractWAR">true</Set>
 

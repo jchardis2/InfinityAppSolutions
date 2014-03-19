@@ -8,7 +8,7 @@
 
 	<Set name="contextPath">/webdesigner</Set>
 	<Set name="war">
-		<Property name="jetty.webapps" default="." />/target/WebDesigner
+		<Property name="jetty.webapps" default="." />/WebDesigner.war
 	</Set>
 	<Set name="extractWAR">true</Set>
 

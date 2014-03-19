@@ -17,8 +17,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="test"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions.lib"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/infinityappsolutions.server.lib"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

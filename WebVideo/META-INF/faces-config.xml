@@ -7,7 +7,13 @@
 		our Java annotations won't get scanned! -->
 	<managed-bean>
 		<managed-bean-name>loginBean</managed-bean-name>
-		<managed-bean-class>com.infinityappsolutions.lib.webvideo.beans.LoginBean
+		<managed-bean-class>com.infinityappsolutions.server.beans.LoginBean
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>loginView</managed-bean-name>
+		<managed-bean-class>com.infinityappsolutions.server.views.LoginView
 		</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
