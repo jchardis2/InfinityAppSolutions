@@ -10,10 +10,10 @@ import javax.faces.bean.SessionScoped;
 import org.eclipse.jetty.util.URIUtil;
 
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
-import com.infinityappsolutions.lib.webvideo.util.VideoUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
+import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 
 @SessionScoped
 @ManagedBean(name = "quickAddView")
@@ -47,10 +47,10 @@ public class QuickAddView implements Serializable {
 			String name = line.substring(lio);
 			video.setName(name);
 			video.setType("HD");
-			String url = VideoUtil.HOME_URL + line;
+			String url = VideoUtil.HOME_VIDEO_URL + line;
 			url = URIUtil.encodePath(url);
 			video.setUrl(url);
-			String filename = VideoUtil.HOME_DIR + line;
+			String filename = VideoUtil.SERVER_VIDEO_DIR + line;
 			video.setFile(filename);
 			videoBeans.add(video);
 		}

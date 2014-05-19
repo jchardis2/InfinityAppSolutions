@@ -10,10 +10,10 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
-import com.infinityappsolutions.lib.webvideo.util.VideoUtil;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
+import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 
 @ViewScoped
 @ManagedBean(name = "editHomeVideoView")
@@ -52,68 +52,85 @@ public class EditHomeVideoView implements Serializable {
 	}
 
 	public String editVideo() {
-		String oldPath = VideoUtil.HOME_DIR + editVideoBean.getFile();
-		String newPath = oldPath;
-		String fileSeperator = System.getProperty("file.separator");
-		if (!editDirtyVideoBean.getName().equals(editVideoBean.getName())) {
-			int fileSep = newPath.lastIndexOf(System
-					.getProperty("file.separator"));
-			newPath = newPath.substring(0, fileSep)
-					+ editDirtyVideoBean.getName();
-		}
-		SecurityManager manager = new SecurityManager();
-
-		try {
-			int fileSep = newPath.lastIndexOf(System
-					.getProperty("file.separator"));
-			manager.checkWrite(newPath.substring(0, fileSep));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		File file = new File(oldPath);
-		System.out.println("File exists: " + file.exists());
-		System.out.println("File Path: " + file.getPath() + "\t or " + oldPath);
-		System.out.println("File New Path: " + newPath);
-		File newFile = new File(newPath);
-		boolean success = file.renameTo(newFile);
-
 		VideoDAO videoDAO = new VideoDAO(DAOFactory.getProductionInstance());
-		try {
-			videoDAO.editVideo(editDirtyVideoBean);
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String oldPath = VideoUtil.SERVER_VIDEO_DIR + editVideoBean.getFile();
+		String newPath = VideoUtil.SERVER_VIDEO_DIR + editDirtyVideoBean.getFile();
+		String fileSeperator = System.getProperty("file.separator");
+		boolean success = false;
+		if (!editDirtyVideoBean.getFile().equals(editVideoBean.getFile())) {
+			int fileSep = newPath.lastIndexOf(System
+					.getProperty("file.separator"));
+			File file = new File(oldPath);
+			System.out.println("File exists: " + file.exists());
+			System.out.println("File Path: " + file.getPath() + "\t or "
+					+ oldPath);
+			System.out.println("File New Path: " + newPath);
+			File newFile = new File(newPath);
+			success = file.renameTo(newFile);
+
 			if (success) {
-				success = false;
-				newFile.renameTo(new File(oldPath));
+				editVideoBean = cloneVideoBean(editDirtyVideoBean);
+				((HttpSession) FacesContext.getCurrentInstance()
+						.getExternalContext().getSession(false)).setAttribute(
+						"editVideoBean", editVideoBean);
+				addMessage(new FacesMessage("Success", editVideoBean.getName()
+						+ " has been moved to " + newPath));
+				compareAndUpload();
+			} else {
+				addMessage(new FacesMessage("Failure", editVideoBean.getName()
+						+ " has not moved to " + newPath));
+				if (editVideoBean != null) {
+					editDirtyVideoBean = cloneVideoBean(editVideoBean);
+				}
 			}
 		}
 
-		FacesMessage msg;
-		if (success) {
-
-			msg = new FacesMessage("Success", editVideoBean.getName()
-					+ "has been moved to" + newPath);
-		} else {
-			msg = new FacesMessage("Failure", editVideoBean.getName()
-					+ "has not moved to" + newPath);
-			if (editVideoBean != null) {
-				editDirtyVideoBean = cloneVideoBean(editVideoBean);
-			}
-		}
-		FacesContext.getCurrentInstance().addMessage(null, msg);
 		return null;
+	}
+
+	private void compareAndUpload() {
+		VideoDAO videoDAO = new VideoDAO(DAOFactory.getProductionInstance());
+		if (compareForUpload(editVideoBean, editDirtyVideoBean)) {
+			try {
+				// if video on server, edit name also
+				if (videoDAO.getVideo(editVideoBean.getName(),
+						editVideoBean.getHash()) != null) {
+					videoDAO.editVideo(editDirtyVideoBean);
+					addMessage(new FacesMessage("Success", editVideoBean.getName()
+							+ " changes were uploaded to the server"));
+				}else{
+					addMessage(new FacesMessage("Info", editVideoBean.getName()
+							+ " does not exist on the server"));
+				}
+				
+			} catch (DBException e) {
+				e.printStackTrace();
+				addMessage(new FacesMessage("Failure", editVideoBean.getName()
+						+ " change was not uploaded to the server"));
+			}
+		}
+	}
+
+	private void addMessage(FacesMessage msg) {
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	private VideoBean cloneVideoBean(VideoBean bean) {
 		VideoBean newBean = new VideoBean();
 		newBean = new VideoBean();
-		newBean.setId(editVideoBean.getId());
-		newBean.setName(editVideoBean.getName());
-		newBean.setType(editVideoBean.getType());
-		newBean.setUrl(editVideoBean.getUrl());
-		newBean.setFile(editVideoBean.getFile());
+		newBean.setId(bean.getId());
+		newBean.setName(bean.getName());
+		newBean.setType(bean.getType());
+		newBean.setUrl(bean.getUrl());
+		newBean.setFile(bean.getFile());
 		return newBean;
+	}
+
+	private boolean compareForUpload(VideoBean one, VideoBean two) {
+		if (one.getName() == two.getName() || one.getFile() == two.getFile()) {
+			return true;
+		}
+		return false;
+
 	}
 }

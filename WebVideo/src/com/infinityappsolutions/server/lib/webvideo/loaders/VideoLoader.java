@@ -34,6 +34,8 @@ public class VideoLoader implements BeanLoader<VideoBean> {
 		vb.setType(rs.getString("type"));
 		vb.setUrl(rs.getString("url"));
 		vb.setFile(rs.getString("file"));
+		vb.setHash(rs.getString("hash"));
+		vb.setImageurl(rs.getString("imageurl"));
 	}
 
 	public VideoBean loadSingle(ResultSet rs) throws SQLException {
@@ -50,6 +52,8 @@ public class VideoLoader implements BeanLoader<VideoBean> {
 		ps.setString(i++, vb.getType());
 		ps.setString(i++, vb.getUrl());
 		ps.setString(i++, vb.getFile());
+		ps.setString(i++, vb.getHash());
+//		ps.setString(i++, vb.getImageurl());
 		return ps;
 	}
 

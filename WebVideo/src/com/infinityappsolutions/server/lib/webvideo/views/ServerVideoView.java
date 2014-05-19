@@ -1,39 +1,45 @@
 package com.infinityappsolutions.server.lib.webvideo.views;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
-import javax.faces.application.FacesMessage;
+import javax.activation.FileTypeMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FileUploadEvent;
 
+import com.infinityappsolutions.lib.util.FileMapUtil;
+import com.infinityappsolutions.lib.util.FileTypeMapUtil;
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
-import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
-import com.infinityappsolutions.server.lib.webvideo.actions.VideoAction;
 import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
+import com.infinityappsolutions.server.lib.webvideo.homeserver.util.HomeVideoGeneratorUtil;
+import com.infinityappsolutions.server.lib.webvideo.views.VideoView;
+import com.infinityappsolutions.server.webvideo.util.VideoFileMapper;
+import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 
+/**
+ * View for Videos that have been uploaded to the server
+ * 
+ * @author jchardis
+ * 
+ */
 @ViewScoped
 @ManagedBean(name = "serverVideoView")
-public class ServerVideoView implements Serializable {
-	private static final long serialVersionUID = 6752442236530393770L;
-	public ArrayList<VideoBean> videoList;
-	public ArrayList<VideoBean> selectedVideos;
-	public VideoBean selectedVideo;
-	public VideoBean savedVideo;
-	public boolean isSelected;
-	public HashMap<Long, Boolean> checkedMap;
+public class ServerVideoView extends VideoView implements Serializable {
+	private static final long serialVersionUID = 4283536377928247297L;
+	private VideoBean editVideoBean;
+	private ArrayList<String> addedVideoBeans;
+	private int notAdded = 0;
 
 	public ServerVideoView() {
 		checkedMap = new HashMap<>();
@@ -42,175 +48,119 @@ public class ServerVideoView implements Serializable {
 	}
 
 	public String generateVideos() {
-		VideoAction videoAction = new VideoAction(
-				DAOFactory.getProductionInstance());
 		try {
-			videoList = videoAction.generateVideos();
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IASException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			FileTypeMapUtil<VideoBean> fileTypeMapUtil = new FileTypeMapUtil<>(
+					VideoUtil.SERVER_VIDEO_DIR, new VideoFileMapper());
+			fileTypeMapUtil.setAcceptExtenstions(VideoUtil
+					.getAcceptedVideoExtensions());
+			videoList = fileTypeMapUtil.generateFileList();
+		} catch (Exception e) {
+			addMessage("Failure", "Unable to generate videos.");
 		}
-		return "error";
+		return null;
+	}
+
+	public String syncVideos() {
+		VideoDAO dao = new VideoDAO(DAOFactory.getProductionInstance());
+		for (VideoBean videoBean : videoList) {
+			try {
+				VideoBean existBean = dao.getVideo(videoBean.getName(),
+						videoBean.getHash());
+
+				if (existBean == null) {
+					try {
+						dao.insertVideo(videoBean);
+					} catch (DBException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					dao.editVideo(videoBean);
+					notAdded++;
+				}
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IASException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+				.getSession(false)).setAttribute("notAdded", notAdded);
+		((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+				.getSession(false)).setAttribute("addedVideoBeans",
+				addedVideoBeans);
+		// try {
+		// FacesContext.getCurrentInstance().getExternalContext()
+		// .redirect("home-sync-video.xhtml");
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+		return "home-sync-video.xhtml";
 	}
 
 	public void saveVideo(VideoBean video) {
-		VideoAction generateVideosAction = new VideoAction(
-				DAOFactory.getProductionInstance());
-
-		try {
-			generateVideosAction.saveVideo(getSelectedVideo());
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super.saveVideo(video);
 	}
 
 	public void generateEmptyVideo(ActionEvent event) {
-		VideoAction generateVideosAction = new VideoAction(
-				DAOFactory.getProductionInstance());
-
-		try {
-			generateVideosAction.generateEmptyVideo(IASRootFacesProvider
-					.getInstance().getLoggedInUserBean());
-			generateVideos();
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super.generateEmptyVideo(event);
 	}
 
 	public String selectVideo(ActionEvent event) {
-		VideoBean video = (VideoBean) event.getComponent().getAttributes()
-				.get("selectedVideo");
-		System.out.println("Video name:" + video.getName());
-		if (video != null)
-			selectedVideos.add(video);
-		return null;
+		return super.selectVideo(event);
 	}
 
 	public String unSelectVideo(ActionEvent event) {
-		VideoBean video = (VideoBean) event.getComponent().getAttributes()
-				.get("selectedVideo");
-		if (video != null)
-			selectedVideos.remove(video);
-		return null;
+		return super.unSelectVideo(event);
 	}
 
 	public void deleteVideos(ActionEvent event) {
-		VideoAction generateVideosAction = new VideoAction(
-				DAOFactory.getProductionInstance());
-		ArrayList<VideoBean> checkedItems = getCheckedVideos();
-		try {
-			generateVideosAction.deleteVideos(checkedItems);
-			generateVideos();
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super.deleteVideos(event);
 	}
 
 	public void saveVideos(ActionEvent event) {
-		VideoAction generateVideosAction = new VideoAction(
-				DAOFactory.getProductionInstance());
-		HttpServletRequest req = (HttpServletRequest) FacesContext
-				.getCurrentInstance().getExternalContext().getRequest();
-		Enumeration<String> names = req.getParameterNames();
-		while (names.hasMoreElements()) {
-			String string = (String) names.nextElement();
-			System.out.println(string);
-		}
-		Collection<String[]> values = req.getParameterMap().values();
-		for (String[] strings : values) {
-			for (String string : strings) {
-				System.out.println(string);
-			}
-		}
+		super.saveVideos(event);
+	}
+
+	public String renameVideo() {
+		String videoPath = VideoUtil.SERVER_VIDEO_DIR + selectedVideo.getFile();
+		File file = new File(videoPath);
+		return null;
+	}
+
+	protected ArrayList<VideoBean> getCheckedVideos() {
+		return super.getCheckedVideos();
+	}
+
+	public void handleFileUpload(FileUploadEvent event) {
+		super.handleFileUpload(event);
+
+	}
+
+	public void setEditVideo(VideoBean editVideoBean) {
+		this.editVideoBean = editVideoBean;
 		try {
-			generateVideosAction.saveVideos(videoList);
-			generateVideos();
-		} catch (DBException e) {
+			((HttpSession) FacesContext.getCurrentInstance()
+					.getExternalContext().getSession(false)).setAttribute(
+					"editVideoBean", editVideoBean);
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("home-edit-video.xhtml");
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void selectVideo() {
-		Map<String, String> params = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap();
-		String video = params.get("video");
-		Boolean b = checkedMap.get(video);
-
-		System.out.println("Boolean: " + b);
-
+	public VideoBean getEditVideoBean() {
+		return editVideoBean;
 	}
 
-	protected ArrayList<VideoBean> getCheckedVideos() {
-		ArrayList<VideoBean> checkedItems = new ArrayList<VideoBean>();
-		Iterator<Long> it = checkedMap.keySet().iterator();
-		for (VideoBean item : videoList) {
-			if (checkedMap.get(item.getId())) {
-				checkedItems.add(item);
-			}
-		}
-		return checkedItems;
-	}
-
-	public void handleFileUpload(FileUploadEvent event) {
-		FacesMessage msg = new FacesMessage("Succesful", event.getFile()
-				.getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-
-	public ArrayList<VideoBean> getVideoList() {
-		return videoList;
-	}
-
-	public void setVideoList(ArrayList<VideoBean> videoList) {
-		this.videoList = videoList;
-	}
-
-	public ArrayList<VideoBean> getSelectedVideos() {
-		return selectedVideos;
-	}
-
-	public void setSelectedVideos(ArrayList<VideoBean> selectedVideos) {
-		this.selectedVideos = selectedVideos;
-	}
-
-	public VideoBean getSelectedVideo() {
-		return selectedVideo;
-	}
-
-	public void setSelectedVideo(VideoBean selectedVideo) {
-		this.selectedVideo = selectedVideo;
-	}
-
-	public VideoBean getSavedVideo() {
-		return savedVideo;
-	}
-
-	public void setSavedVideo(VideoBean savedVideo) {
-		this.savedVideo = savedVideo;
-		saveVideo(savedVideo);
-	}
-
-	public boolean isSelected() {
-		return isSelected;
-	}
-
-	public void setSelected(boolean isSelected) {
-		this.isSelected = isSelected;
-	}
-
-	public HashMap<Long, Boolean> getCheckedMap() {
-		return checkedMap;
-	}
-
-	public void setCheckedMap(HashMap<Long, Boolean> checkedMap) {
-		this.checkedMap = checkedMap;
+	public void setEditVideoBean(VideoBean editVideoBean) {
+		this.editVideoBean = editVideoBean;
 	}
 
 }

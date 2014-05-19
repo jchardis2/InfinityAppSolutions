@@ -5,6 +5,10 @@
 	<artifactId>WebVideo</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
+	<properties>
+		<war.dir>/home/jchardis/git/InfinityAppSolutions-WebApps-Builds/webapps
+		</war.dir>
+	</properties>
 	<repositories>
 		<repository>
 			<id>java.net.m2</id>
@@ -117,6 +121,8 @@
 		<finalName>WebVideo</finalName>
 		<directory>target</directory>
 		<outputDirectory>./WEB-INF/classes</outputDirectory>
+		<testOutputDirectory>target/test-classes</testOutputDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -132,7 +138,7 @@
 				<version>2.4</version>
 				<configuration>
 					<webXml>WEB-INF/web.xml</webXml>
-					<outputDirectory>/home/jchardis/git/InfinityAppSolutions/webapps
+					<outputDirectory>${war.dir}
 					</outputDirectory>
 					<archive>
 						<manifest>

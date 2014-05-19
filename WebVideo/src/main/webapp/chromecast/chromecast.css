@@ -1,0 +1,18 @@
+.background {
+	/*   background: center no-repeat url(background.png); */
+	background-color: black;
+}
+
+.logo {
+	background-image:
+		url(http://home.infinityappsolutions.com:8080/webvideo/chromecast/logo.jpg);
+}
+
+.progressBar {
+	background-color: rgb(238, 255, 65);
+}
+
+.splash {
+	background-image:
+		url(http://home.infinityappsolutions.com:8080/webvideo/images/movie.png);
+}

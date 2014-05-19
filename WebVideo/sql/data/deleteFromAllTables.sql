@@ -4,4 +4,6 @@ DELETE FROM user_role;
 DELETE FROM org;
 DELETE FROM org_users;
 DELETE FROM admin;
+DELETE FROM servervideo;
 DELETE FROM video;
+DELETE FROM videoimage;

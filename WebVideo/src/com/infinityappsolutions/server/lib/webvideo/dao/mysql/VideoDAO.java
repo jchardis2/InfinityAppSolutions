@@ -45,7 +45,7 @@ public class VideoDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("SELECT * FROM webvideo WHERE id=?");
+			ps = conn.prepareStatement("SELECT * FROM video WHERE id=?");
 			ps.setLong(1, id);
 			ResultSet rs;
 			rs = ps.executeQuery();
@@ -68,6 +68,46 @@ public class VideoDAO {
 	}
 
 	/**
+	 * Returns the video for the given name and hash
+	 * 
+	 * @param name
+	 *            The name of the video in question.
+	 * @param hash
+	 *            The hash of the video in question.
+	 * @return A Video representing the video
+	 * @throws IASException
+	 * @throws DBException
+	 */
+	public VideoBean getVideo(String name, String hash) throws DBException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = factory.getConnection();
+			ps = conn
+					.prepareStatement("SELECT `video`.*, `videoimage`.`imageurl`  FROM `video`, `videoimage` WHERE name=? AND hash=? AND `video`.`videoimageid` = `videoimage`.`videoimageid`");
+			ps.setString(1, name);
+			ps.setString(2, hash);
+			ResultSet rs;
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				VideoBean video = videoLoader.loadSingle(rs);
+				rs.close();
+				ps.close();
+				return video;
+			} else {
+				rs.close();
+				ps.close();
+				return null;
+			}
+
+		} catch (SQLException | NamingException e) {
+			throw new DBException(e);
+		} finally {
+			DBUtil.closeConnection(conn, ps);
+		}
+	}
+
+	/**
 	 * Returns the videoList
 	 * 
 	 * @return A VideoList representing the videos
@@ -79,7 +119,7 @@ public class VideoDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("SELECT `video`.*  FROM `video`");
+			ps = conn.prepareStatement("SELECT `video`.*, `videoimage`.`imageurl`  FROM `video`, `videoimage` WHERE `video`.`videoimageid` = `videoimage`.`videoimageid` GROUP BY  `video`.`name`");
 			ResultSet rs;
 			rs = ps.executeQuery();
 			ArrayList<VideoBean> term = (ArrayList<VideoBean>) videoLoader
@@ -131,7 +171,7 @@ public class VideoDAO {
 		try {
 			conn = factory.getConnection();
 			ps = conn
-					.prepareStatement("INSERT INTO  `video` (`id` ,`name` ,`type` ,`url`, `file`)VALUES (? ,  ?,  ?,  ?,  ?);");
+					.prepareStatement("INSERT INTO  `video` (`id` ,`name` ,`type` ,`url`, `file`, `hash`, `videoimageid`)VALUES (? ,  ?,  ?,  ?,  ?,  ?, 1);");
 			videoLoader.loadParameters(ps, video);
 			ps.executeUpdate();
 		} catch (SQLException | NamingException e) {
@@ -156,7 +196,7 @@ public class VideoDAO {
 			conn = factory.getConnection();
 			for (VideoBean video : videos) {
 				ps = conn
-						.prepareStatement("INSERT INTO  `video` (`id` ,`name` ,`type` ,`url`, `file`)VALUES (? ,  ?,  ?,  ?,  ?);");
+						.prepareStatement("INSERT INTO  `video` (`id` ,`name` ,`type` ,`url`, `file`, `hash`)VALUES (? ,  ?,  ?,  ?,  ?,  ?);");
 				videoLoader.loadParameters(ps, video);
 				ps.executeUpdate();
 			}
@@ -209,7 +249,7 @@ public class VideoDAO {
 			conn = factory.getConnection();
 			for (VideoBean video : videos) {
 				ps = conn
-						.prepareStatement("UPDATE `video` SET  `id` =?,`name` =?,`type`=?,`url`=? ,`file`=? WHERE  `video`.`id` =?;");
+						.prepareStatement("UPDATE `video` SET  `id` =?,`name` =?,`type`=?,`url`=? ,`file`=?,`hash`=? WHERE  `video`.`id` =?;");
 				videoLoader.loadParameters(ps, video);
 				int parameterCount = ps.getParameterMetaData()
 						.getParameterCount();

@@ -11,12 +11,12 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import com.infinityappsolutions.lib.security.SecureHashUtil;
 import com.infinityappsolutions.server.dao.DAOFactory;
 import com.infinityappsolutions.server.faces.FacesProvider;
 import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
 @ViewScoped
 @ManagedBean(name = "loginView")

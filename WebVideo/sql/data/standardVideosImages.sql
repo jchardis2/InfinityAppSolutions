@@ -1,0 +1,1 @@
+INSERT INTO  `webvideo`.`videoimage` (`videoimageid` ,`imageurl`)VALUES ('0',  'home.infinityappsolutions.com:8080/webvideo/images/movie.png');

@@ -64,6 +64,18 @@ public class TestDataGenerator {
 		standardUserRoles();
 		standardOrgs();
 		standardOrgUsers();
+		standardVideos();
+		standardVideoImages();
+	}
+
+	public void standardVideos() throws SQLException, FileNotFoundException,
+			IOException, NamingException {
+		new DBBuilder(factory).executeSQLFile(DIR + "/standardVideos.sql");
+	}
+
+	public void standardVideoImages() throws SQLException, FileNotFoundException,
+			IOException, NamingException {
+		new DBBuilder(factory).executeSQLFile(DIR + "/standardVideosImages.sql");
 	}
 
 	public void standardUsers() throws SQLException, FileNotFoundException,

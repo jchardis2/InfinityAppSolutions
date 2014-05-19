@@ -1,34 +1,121 @@
 package com.infinityappsolutions.server.lib.webvideo.homeserver.views;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.FileUploadEvent;
 
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
-import com.infinityappsolutions.lib.webvideo.util.VideoUtil;
-import com.infinityappsolutions.server.lib.webvideo.views.ServerVideoView;
+import com.infinityappsolutions.server.lib.exceptions.DBException;
+import com.infinityappsolutions.server.lib.exceptions.IASException;
+import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
+import com.infinityappsolutions.server.lib.webvideo.homeserver.util.HomeVideoGeneratorUtil;
+import com.infinityappsolutions.server.lib.webvideo.views.VideoView;
+import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 
 @ViewScoped
 @ManagedBean(name = "homeVideoView")
-public class HomeVideoView extends ServerVideoView implements Serializable {
+public class HomeVideoView extends VideoView implements Serializable {
 	private static final long serialVersionUID = 4283536377928247297L;
-	private long renameId = -1;
+	private VideoBean editVideoBean;
+	private ArrayList<String> addedVideoBeans;
+	private int notAdded = 0;
+	private boolean showTVVideos = true;
+	private boolean showMovieVideos = true;;
 
 	public HomeVideoView() {
 		checkedMap = new HashMap<>();
 		selectedVideos = new ArrayList<>();
-		generateVideos();
+		generateCustomVideoList(); // called by super
 	}
 
+	@Override
 	public String generateVideos() {
-		return super.generateVideos();
+		HomeVideoGeneratorUtil generatorUtil = new HomeVideoGeneratorUtil();
+		try {
+			videoList = generatorUtil.generateAllVideos();
+		} catch (Exception e) {
+			addMessage("Failure", "Unable to generate videos.");
+		}
+		return null;
+	}
+
+	public String syncVideos() {
+		VideoDAO dao = new VideoDAO(DAOFactory.getProductionInstance());
+		for (VideoBean videoBean : videoList) {
+			try {
+				VideoBean existBean = dao.getVideo(videoBean.getName(),
+						videoBean.getHash());
+
+				if (existBean == null) {
+					try {
+						dao.insertVideo(videoBean);
+					} catch (DBException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					dao.editVideo(videoBean);
+					notAdded++;
+				}
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IASException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+				.getSession(false)).setAttribute("notAdded", notAdded);
+		((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+				.getSession(false)).setAttribute("addedVideoBeans",
+				addedVideoBeans);
+		// try {
+		// FacesContext.getCurrentInstance().getExternalContext()
+		// .redirect("home-sync-video.xhtml");
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+		return "home-sync-video.xhtml";
+	}
+
+	public void showTvVideosListener(ValueChangeEvent event) {
+		generateCustomVideoList();
+	}
+
+	public void showMoviesVideosListener(ValueChangeEvent e) {
+		generateCustomVideoList();
+	}
+
+	public void generateCustomVideoList() {
+		HomeVideoGeneratorUtil generatorUtil = new HomeVideoGeneratorUtil();
+		try {
+			videoList = new ArrayList<VideoBean>();
+			if (showTVVideos) {
+				videoList = generatorUtil.generateVideoBeans(
+						VideoUtil.SERVER_VIDEO_TV_DIR, videoList);
+			}
+			if (showMovieVideos) {
+				videoList = generatorUtil.generateVideoBeans(
+						VideoUtil.SERVER_VIDEO_MOVIES_DIR, videoList);
+			}
+		} catch (Exception e) {
+			addMessage("Failure", "Unable to generate videos.");
+		}
 	}
 
 	public void saveVideo(VideoBean video) {
@@ -55,12 +142,8 @@ public class HomeVideoView extends ServerVideoView implements Serializable {
 		super.saveVideos(event);
 	}
 
-	public void selectVideo() {
-		super.selectVideo();
-	}
-
 	public String renameVideo() {
-		String videoPath = VideoUtil.HOME_DIR + selectedVideo.getFile();
+		String videoPath = VideoUtil.HOME_VIDEO_DIR + selectedVideo.getFile();
 		File file = new File(videoPath);
 		return null;
 	}
@@ -74,16 +157,58 @@ public class HomeVideoView extends ServerVideoView implements Serializable {
 
 	}
 
-	public long getRenameId() {
-		return renameId;
+	public void setEditVideo(VideoBean editVideoBean) {
+		this.editVideoBean = editVideoBean;
+		try {
+			((HttpSession) FacesContext.getCurrentInstance()
+					.getExternalContext().getSession(false)).setAttribute(
+					"editVideoBean", editVideoBean);
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("home-edit-video.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void setRenameId(long renameId) {
-		this.renameId = renameId;
+	public VideoBean getEditVideoBean() {
+		return editVideoBean;
 	}
-	
-	public void renameVideo(VideoBean video){
-		System.out.println(video.getName());
+
+	public void setEditVideoBean(VideoBean editVideoBean) {
+		this.editVideoBean = editVideoBean;
+	}
+
+	public ArrayList<String> getAddedVideoBeans() {
+		return addedVideoBeans;
+	}
+
+	public void setAddedVideoBeans(ArrayList<String> addedVideoBeans) {
+		this.addedVideoBeans = addedVideoBeans;
+	}
+
+	public int getNotAdded() {
+		return notAdded;
+	}
+
+	public void setNotAdded(int notAdded) {
+		this.notAdded = notAdded;
+	}
+
+	public boolean isShowTVVideos() {
+		return showTVVideos;
+	}
+
+	public void setShowTVVideos(boolean showTVVideos) {
+		this.showTVVideos = showTVVideos;
+	}
+
+	public boolean isShowMovieVideos() {
+		return showMovieVideos;
+	}
+
+	public void setShowMovieVideos(boolean showMovieVideos) {
+		this.showMovieVideos = showMovieVideos;
 	}
 
 }

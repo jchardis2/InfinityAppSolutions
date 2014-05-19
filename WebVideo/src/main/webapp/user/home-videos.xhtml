@@ -39,48 +39,49 @@
 
 <h:body>
 	<ui:include page="/includes/nav-bar-main.xhtml"></ui:include>
+
 	<h:form id="form" prependId="false">
+
 		<h:panelGrid columns="4" cellpadding="5">
-			<h:commandButton value="Add Video" styleClass="btn btn-default"
-				actionListener="#{homeVideoView.generateEmptyVideo}"
-				update="form:panel"></h:commandButton>
-			<h:commandButton value="Delete" styleClass="btn btn-default"
-				actionListener="#{homeVideoView.deleteVideos}" update="form:panel"></h:commandButton>
-			<h:commandButton value="Save" styleClass="btn btn-default"
-				actionListener="#{homeVideoView.saveVideos}" update="form:panel"></h:commandButton>
-			<h:commandButton value="Advanced Add" styleClass="btn btn-default"
-				action="advancedAdd.xhtml?faces-redirect=true" update="form:panel"></h:commandButton>
+			<h:commandButton value="Sync Videos" styleClass="btn btn-default"
+				actionListener="#{homeVideoView.syncVideos}" update="form"></h:commandButton>
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
 		</h:panelGrid>
-		<p:panel id="panel">
-			<table id="table"
-				class="table table-striped .table-bordered .table-condensed">
-				<thead>
+
+
+		<table id="table"
+			class="table table-striped .table-bordered .table-condensed">
+			<thead>
+				<tr>
+					<th><input class="columnCheckbox" type="checkbox"
+						onclick="columnCheckBoxClick(this)" /></th>
+					<th>Edit</th>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Path</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat id="updater" var="video"
+					value="#{homeVideoView.videoList}" varStatus="status">
 					<tr>
-						<th><input class="columnCheckbox" type="checkbox"
-							onclick="columnCheckBoxClick(this)" /></th>
-						<th>Name</th>
-						<th>Type</th>
-						<th>URL</th>
+						<td><h:selectBooleanCheckbox styleClass="rowCheckbox"
+								value="#{homeVideoView.checkedMap[video.id]}">
+							</h:selectBooleanCheckbox></td>
+						<td><p:commandButton icon="ui-icon-gear"
+								title="Edit #{video.name}">
+								<f:setPropertyActionListener value="#{video}"
+									target="#{homeVideoView.editVideo}" />
+							</p:commandButton></td>
+						<td><a href="//#{video.url}">#{video.name}</a></td>
+						<td><h:outputLabel value="#{video.type}" /></td>
+						<td><h:outputLabel value="#{video.file}" /></td>
 					</tr>
-				</thead>
-				<tbody>
-					<ui:repeat id="updater" var="video"
-						value="#{homeVideoView.videoList}" varStatus="status">
-						<tr>
-							<td><h:selectBooleanCheckbox styleClass="rowCheckbox"
-									value="#{homeVideoView.checkedMap[video.id]}">
-								</h:selectBooleanCheckbox></td>
-							<td></p:remoteCommand> <h:inputTextarea rows="1" cols="50"
-									value="#{video.name}"
-									onclick="#{homeVideoView.checkedMap[video.id]}" /></td>
-							<td><p:inputTextarea rows="2" cols="20"
-									value="#{video.type}" /></td>
-							<td><p:inputTextarea rows="2" cols="20" value="#{video.url}" /></td>
-						</tr>
-					</ui:repeat>
-				</tbody>
-			</table>
-		</p:panel>
+				</ui:repeat>
+			</tbody>
+		</table>
 	</h:form>
 	<ui:include page="/includes/footer.xhtml"></ui:include>
 </h:body>

@@ -8,11 +8,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import com.infinityappsolutions.lib.beans.UserBean;
+import com.infinityappsolutions.lib.security.SecureHashUtil;
 import com.infinityappsolutions.server.dao.DAOFactory;
 import com.infinityappsolutions.server.lib.actions.IASRootCreateAccountAction;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.log.Logger;
-import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 
 @ViewScoped
 @ManagedBean(name = "createAccountView")

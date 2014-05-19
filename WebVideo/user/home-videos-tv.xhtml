@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	</link>
+	<!-- Optional theme -->
+	<link rel="stylesheet"
+		href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+	</link>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		var columnCheckBoxClick = function() {
+			var checked = $('.columnCheckbox').prop('checked');
+			$('.rowCheckbox').prop('checked', checked);
+		};
+		var onclickNull = function() {
+			this.value = null;
+		};
+		var setText = function(id, object) {
+			$(id).val(object.value);
+		};
+		// 		$(".fileInput").live('change', function (id, object) {
+		// 			$(id).val(object.value);
+		// 		});
+	</script>
+	<!-- MY CSS -->
+	<title>Videos - Videos</title>
+</h:head>
+
+<h:body>
+	<ui:include page="/includes/nav-bar-main.xhtml"></ui:include>
+	<ui:include src="/user/home-videos-template.xhtml">
+		<ui:param name="videoParam " value="#{homeVideoView}"></ui:param>
+	</ui:include>
+
+	<ui:include page="/includes/footer.xhtml"></ui:include>
+</h:body>
+</html>

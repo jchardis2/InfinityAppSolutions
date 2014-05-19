@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="WebVideo" basedir=".">
+<project name="WebVideo" basedir="." default="package">
 	<property name="project.name" value="infinityappsolutions.lib" />
 	<property name="src.dir" value="src" />
 
@@ -20,21 +20,10 @@
 			<arg value="clean" />
 		</exec>
 	</target>
-
+ 
 	<target name="package" depends="clean">
 		<exec executable="mvn">
 			<arg value="package" />
-		</exec>
-	</target>
-
-	<target name="compile" depends="package">
-		<exec executable="mvn">
-			<arg value="package" />
-		</exec>
-	</target>
-	<target name="install" depends="compile">
-		<exec executable="mvn">
-			<arg value="install" />
 		</exec>
 	</target>
 </project>

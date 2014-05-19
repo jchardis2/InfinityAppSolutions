@@ -5,6 +5,10 @@
 	<artifactId>WebDesigner</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
+	<properties>
+		<war.dir>/home/jchardis/git/InfinityAppSolutions-WebApps-Builds/webapps
+		</war.dir>
+	</properties>
 	<repositories>
 		<repository>
 			<id>java.net.m2</id>
@@ -110,7 +114,8 @@
 				<version>2.4</version>
 				<configuration>
 					<webXml>WEB-INF/web.xml</webXml>
-					<outputDirectory>/home/jchardis/git/InfinityAppSolutions/webapps</outputDirectory>
+					<outputDirectory>${war.dir}
+					</outputDirectory>
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
@@ -130,8 +135,10 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<includeGroupIds>infinityappsolutions-server-lib</includeGroupIds>
-							<outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
+							<includeGroupIds>infinityappsolutions-server-lib
+							</includeGroupIds>
+							<outputDirectory>${project.build.directory}/dependency-jars/
+							</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -156,7 +163,8 @@
 							</artifactItems>
 							<includes>**/*.java</includes>
 							<excludes>**/*.properties</excludes>
-							<outputDirectory>${project.build.directory}/wars</outputDirectory>
+							<outputDirectory>${project.build.directory}/wars
+							</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>

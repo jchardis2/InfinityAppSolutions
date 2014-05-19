@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.infinityappsolutions.lib.security.SecureHashUtil;
 import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.lib.security.SecureHashUtil;
 import com.infinityappsolutions.server.webterms.dao.DAOFactory;
 
 public class TermLoginServlet extends AbstractTermsServlet {
