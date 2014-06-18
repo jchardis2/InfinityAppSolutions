@@ -11,8 +11,8 @@ import org.eclipse.jetty.util.URIUtil;
 
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
-import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.mysql.VideoDAO;
 import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 
 @SessionScoped

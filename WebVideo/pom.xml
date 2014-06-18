@@ -6,7 +6,7 @@
 	<version>0.0.1</version>
 	<packaging>war</packaging>
 	<properties>
-		<war.dir>/home/jchardis/git/InfinityAppSolutions-WebApps-Builds/webapps
+		<war.dir>${user.home}/git/InfinityAppSolutions-WebApps-Builds/webapps
 		</war.dir>
 	</properties>
 	<repositories>

@@ -5,5 +5,6 @@ DELETE FROM org;
 DELETE FROM org_users;
 DELETE FROM admin;
 DELETE FROM servervideo;
+DELETE FROM videofolder;
 DELETE FROM video;
 DELETE FROM videoimage;

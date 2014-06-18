@@ -39,6 +39,11 @@ public class TestDataGenerator {
 
 	}
 
+	public static void addAllFromFresh() throws FileNotFoundException, IOException, SQLException, NamingException {
+		TestDataGenerator gen = new TestDataGenerator();
+		gen.standardData();
+	}
+
 	private String DIR = "sql/data";
 
 	private AbstractDAOFactory factory;
@@ -73,9 +78,10 @@ public class TestDataGenerator {
 		new DBBuilder(factory).executeSQLFile(DIR + "/standardVideos.sql");
 	}
 
-	public void standardVideoImages() throws SQLException, FileNotFoundException,
-			IOException, NamingException {
-		new DBBuilder(factory).executeSQLFile(DIR + "/standardVideosImages.sql");
+	public void standardVideoImages() throws SQLException,
+			FileNotFoundException, IOException, NamingException {
+		new DBBuilder(factory)
+				.executeSQLFile(DIR + "/standardVideosImages.sql");
 	}
 
 	public void standardUsers() throws SQLException, FileNotFoundException,

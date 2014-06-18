@@ -24,7 +24,7 @@ import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.views.JSFView;
 import com.infinityappsolutions.server.lib.webvideo.actions.UploadVideoAction;
 import com.infinityappsolutions.server.lib.webvideo.actions.VideoAction;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
 
 @ViewScoped
 @ManagedBean(name = "videoView")
@@ -100,7 +100,6 @@ public class VideoView extends JSFView implements Serializable {
 	public String selectVideo(ActionEvent event) {
 		VideoBean video = (VideoBean) event.getComponent().getAttributes()
 				.get("selectedVideo");
-		System.out.println("Video name:" + video.getName());
 		if (video != null)
 			selectedVideos.add(video);
 		return null;

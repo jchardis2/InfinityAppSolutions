@@ -18,10 +18,10 @@ import org.primefaces.event.FileUploadEvent;
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
-import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
 import com.infinityappsolutions.server.lib.webvideo.homeserver.util.HomeVideoGeneratorUtil;
 import com.infinityappsolutions.server.lib.webvideo.views.VideoView;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.mysql.VideoDAO;
 import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 
 @ViewScoped
@@ -37,19 +37,19 @@ public class HomeVideoView extends VideoView implements Serializable {
 	public HomeVideoView() {
 		checkedMap = new HashMap<>();
 		selectedVideos = new ArrayList<>();
-		generateCustomVideoList(); // called by super
+		generateVideos(); // called by super
 	}
 
-	@Override
-	public String generateVideos() {
-		HomeVideoGeneratorUtil generatorUtil = new HomeVideoGeneratorUtil();
-		try {
-			videoList = generatorUtil.generateAllVideos();
-		} catch (Exception e) {
-			addMessage("Failure", "Unable to generate videos.");
-		}
-		return null;
-	}
+	// @Override
+	// public String generateVideos() {
+	// HomeVideoGeneratorUtil generatorUtil = new HomeVideoGeneratorUtil();
+	// try {
+	// videoList = generatorUtil.generateAllVideos();
+	// } catch (Exception e) {
+	// addMessage("Failure", "Unable to generate videos.");
+	// }
+	// return null;
+	// }
 
 	public String syncVideos() {
 		VideoDAO dao = new VideoDAO(DAOFactory.getProductionInstance());
@@ -94,28 +94,36 @@ public class HomeVideoView extends VideoView implements Serializable {
 	}
 
 	public void showTvVideosListener(ValueChangeEvent event) {
-		generateCustomVideoList();
+		generateVideos();
 	}
 
 	public void showMoviesVideosListener(ValueChangeEvent e) {
-		generateCustomVideoList();
+		generateVideos();
 	}
 
-	public void generateCustomVideoList() {
+	@Override
+	public String generateVideos() {
 		HomeVideoGeneratorUtil generatorUtil = new HomeVideoGeneratorUtil();
 		try {
 			videoList = new ArrayList<VideoBean>();
-			if (showTVVideos) {
+			if (showTVVideos && showMovieVideos) {
+
 				videoList = generatorUtil.generateVideoBeans(
-						VideoUtil.SERVER_VIDEO_TV_DIR, videoList);
-			}
-			if (showMovieVideos) {
-				videoList = generatorUtil.generateVideoBeans(
-						VideoUtil.SERVER_VIDEO_MOVIES_DIR, videoList);
+						VideoUtil.SERVER_VIDEO_DIR, videoList);
+			} else {
+				if (showTVVideos) {
+					videoList = generatorUtil.generateVideoBeans(
+							VideoUtil.SERVER_VIDEO_TV_DIR, videoList);
+				}
+				if (showMovieVideos) {
+					videoList = generatorUtil.generateVideoBeans(
+							VideoUtil.SERVER_VIDEO_MOVIES_DIR, videoList);
+				}
 			}
 		} catch (Exception e) {
 			addMessage("Failure", "Unable to generate videos.");
 		}
+		return null;
 	}
 
 	public void saveVideo(VideoBean video) {

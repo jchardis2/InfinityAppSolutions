@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="WebVideo" basedir="." default="package">
+	<property name="project.name" value="infinityappsolutions.lib" />
+	<property name="src.dir" value="src" />
+	<property name="git.repo" value="${user.home}/git/" />
+	<property name="git.repo.libs" value="${git.repo}/InfinityAppSolutions-libs" />
+	
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+	<property name="dist" location="0.0.1" />
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="clean">
+		<exec executable="mvn">
+			<arg value="clean" />
+		</exec>
+	</target>
+
+	<target name="package" depends="install">
+		<exec executable="mvn">
+			<arg value="package" />
+		</exec>
+	</target>
+
+	<target name="install" depends="install-ias-libs, install-ias-server-libs, install-ias-webvideo-libs">
+	</target>
+	
+	<target name="install-ias-libs">
+		<exec executable="ant" dir="${git.repo.libs}/infinityappsolutions.lib">
+			<arg value="install" />
+		</exec>
+	</target>
+	
+	
+	<target name="install-ias-server-libs">
+		<exec executable="ant" dir="${git.repo.libs}/infinityappsolutions.server.lib">
+			<arg value="install" />
+		</exec>
+	</target>
+	
+		<target name="install-ias-webvideo-libs">
+		<exec executable="ant" dir="${git.repo.libs}/infinityappsolutions.lib.webvideo">
+			<arg value="install" />
+		</exec>
+	</target>
+	
+</project>

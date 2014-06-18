@@ -11,7 +11,7 @@ import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
 import com.infinityappsolutions.server.lib.ui.actions.GenerateOrgUserBeanAction;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
 
 @ViewScoped
 @ManagedBean(name = "generateOrgUserBeanView")

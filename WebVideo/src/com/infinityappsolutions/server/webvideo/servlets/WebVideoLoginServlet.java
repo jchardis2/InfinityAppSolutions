@@ -14,7 +14,7 @@ import com.infinityappsolutions.lib.util.StringsUtil;
 import com.infinityappsolutions.server.lib.actions.IASRootLoginAction;
 import com.infinityappsolutions.server.lib.beans.LoggedInUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
 
 public class WebVideoLoginServlet extends AbstractWebVideoServlet {
 	private static final long serialVersionUID = 1458278335635638361L;

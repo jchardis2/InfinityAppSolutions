@@ -20,10 +20,10 @@ import com.infinityappsolutions.lib.util.FileTypeMapUtil;
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
-import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
 import com.infinityappsolutions.server.lib.webvideo.homeserver.util.HomeVideoGeneratorUtil;
 import com.infinityappsolutions.server.lib.webvideo.views.VideoView;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.mysql.VideoDAO;
 import com.infinityappsolutions.server.webvideo.util.VideoFileMapper;
 import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 

@@ -15,7 +15,7 @@ import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
 import com.infinityappsolutions.server.webvideo.dao.mysql.VideoDAO;
 
-public class VideoGeneratorServlet extends HttpServlet {
+public class CustomVideoGeneratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1458278335635638361L;
 
 	protected void doGet(HttpServletRequest request,

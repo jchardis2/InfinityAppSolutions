@@ -32,9 +32,4 @@
 			<arg value="package" />
 		</exec>
 	</target>
-	<target name="install" depends="compile">
-		<exec executable="mvn">
-			<arg value="install" />
-		</exec>
-	</target>
 </project>

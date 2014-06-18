@@ -1,3 +1,21 @@
+CREATE TABLE IF NOT EXISTS `videofolder` (
+  `videofolderid` bigint(20) NOT NULL,
+  `parentfolderid` bigint(20) NOT NULL DEFAULT '1',
+  `name` varchar(200) NOT NULL,
+  `path` varchar(200) NOT NULL,
+  `ismovie` tinyint(1) NOT NULL,
+  `isshow` tinyint(1) NOT NULL,
+  `isseason` tinyint(1) NOT NULL,
+  PRIMARY KEY (`videofolderid`,`parentfolderid`,`name`,`path`),
+  UNIQUE KEY `name` (`name`,`path`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+INSERT INTO `videofolder` (`videofolderid`, `parentfolderid`, `name`, `path`, `ismovie`, `isshow`, `isseason`) VALUES
+(1, 1, 'videos', '/videos', 0, 0, 0);
+ALTER TABLE  `videofolder` CHANGE  `videofolderid`  `videofolderid` BIGINT( 20 ) NOT NULL AUTO_INCREMENT ;
+  
+ALTER TABLE  `videofolder` ADD FOREIGN KEY (  `parentfolderid` ) REFERENCES  `webvideo`.`videofolder` (
+`videofolderid`) ON DELETE CASCADE ON UPDATE CASCADE ;
+
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
@@ -54,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 
 CREATE TABLE IF NOT EXISTS `video` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `videofolderid` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` varchar(10) NOT NULL COMMENT '1080p 720p Blueray etc',
   `url` varchar(255) NOT NULL,
@@ -62,7 +81,8 @@ CREATE TABLE IF NOT EXISTS `video` (
   `videoimageid` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
-  KEY `videoimageid` (`videoimageid`)
+  KEY `videoimageid` (`videoimageid`),
+  KEY `videofolderid` (`videofolderid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `videoimage` (
@@ -89,6 +109,7 @@ ALTER TABLE `user_role`
   ADD CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
   
 ALTER TABLE `video`
+  ADD CONSTRAINT `video_ibfk_2` FOREIGN KEY (`videofolderid`) REFERENCES `videofolder` (`videofolderid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `video_ibfk_1` FOREIGN KEY (`videoimageid`) REFERENCES `videoimage` (`videoimageid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `servervideo`

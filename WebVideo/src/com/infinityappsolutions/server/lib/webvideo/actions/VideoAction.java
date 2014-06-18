@@ -9,8 +9,8 @@ import com.infinityappsolutions.server.lib.beans.OrgUserBean;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.exceptions.IASException;
 import com.infinityappsolutions.server.lib.faces.IASRootFacesProvider;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
-import com.infinityappsolutions.server.lib.webvideo.dao.mysql.VideoDAO;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.mysql.VideoDAO;
 import com.infinityappsolutions.server.webvideo.util.VideoUtil;
 
 public class VideoAction {
@@ -33,7 +33,7 @@ public class VideoAction {
 
 	public void generateEmptyVideo(LoggedInUserBean liub) throws DBException {
 		VideoDAO videosDAO = new VideoDAO(daoFactory);
-		videosDAO.insertVideo(new VideoBean(0L, "", "", "", "", "",
+		videosDAO.insertVideo(new VideoBean(0L, 1L, "", "", "", "", "",
 				VideoUtil.VIDEO_DEFAULT_IMAGE_URL));
 	}
 

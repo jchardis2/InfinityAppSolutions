@@ -30,6 +30,7 @@ public class VideoLoader implements BeanLoader<VideoBean> {
 
 	public void loadCommon(ResultSet rs, VideoBean vb) throws SQLException {
 		vb.setId(rs.getLong("id"));
+		vb.setVideofolderid(rs.getLong("videofolderid"));
 		vb.setName(rs.getString("name"));
 		vb.setType(rs.getString("type"));
 		vb.setUrl(rs.getString("url"));
@@ -48,12 +49,13 @@ public class VideoLoader implements BeanLoader<VideoBean> {
 			throws SQLException {
 		int i = 1;
 		ps.setLong(i++, vb.getId());
+		ps.setLong(i++, vb.getVideofolderid());
 		ps.setString(i++, vb.getName());
 		ps.setString(i++, vb.getType());
 		ps.setString(i++, vb.getUrl());
 		ps.setString(i++, vb.getFile());
 		ps.setString(i++, vb.getHash());
-//		ps.setString(i++, vb.getImageurl());
+		// ps.setString(i++, vb.getImageurl());
 		return ps;
 	}
 

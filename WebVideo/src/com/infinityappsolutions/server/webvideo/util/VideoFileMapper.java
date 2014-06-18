@@ -4,7 +4,6 @@ import java.io.File;
 
 import com.infinityappsolutions.lib.interfaces.IFileMap;
 import com.infinityappsolutions.lib.webvideo.beans.VideoBean;
-
 public class VideoFileMapper implements IFileMap<VideoBean> {
 
 	@Override
@@ -22,12 +21,12 @@ public class VideoFileMapper implements IFileMap<VideoBean> {
 		// }
 		// SecureHashUtil hashUtil = new SecureHashUtil();
 		// String hash = hashUtil.sha256Hash(file);
-		return new VideoBean(0, filename, "", fileUrl, filePath, "",
-				VideoUtil.VIDEO_DEFAULT_IMAGE_URL);
+		return new VideoBean(0, 1L, filename, "", fileUrl, filePath, "",
+				VideoUtil.VIDEO_DEFAULT_IMAGE_URL);  
 	}
-
+    
 	public VideoBean getNextFile() {
 		return null;
-	}
+	} 
 
 }

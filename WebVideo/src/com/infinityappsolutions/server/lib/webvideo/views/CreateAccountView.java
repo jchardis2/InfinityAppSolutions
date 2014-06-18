@@ -12,7 +12,7 @@ import com.infinityappsolutions.lib.security.SecureHashUtil;
 import com.infinityappsolutions.server.lib.actions.IASRootCreateAccountAction;
 import com.infinityappsolutions.server.lib.exceptions.DBException;
 import com.infinityappsolutions.server.lib.log.Logger;
-import com.infinityappsolutions.server.lib.webvideo.dao.DAOFactory;
+import com.infinityappsolutions.server.webvideo.dao.DAOFactory;
 
 @ViewScoped
 @ManagedBean(name = "createAccountView")
