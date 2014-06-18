@@ -1,15 +1,38 @@
 package com.infinityappsolutions.server.webdesigner.beans;
-public class WidgetTypesBean  {
 
-	private Long id;
+public class WidgetTypesBean {
+
+	private long id;
 	private String name;
-	private Long orgid;
-	public WidgetTypesBean(){}
-	public WidgetTypesBean( Long id, String name, Long orgid){}
-	public Long getId(){return id;}
-	public void setId(Long id){this. id=id;}
-	public String getName(){return name;}
-	public void setName(String name){this. name=name;}
-	public Long getOrgid(){return orgid;}
-	public void setOrgid(Long orgid){this. orgid=orgid;}
+	private long orgid;
+
+	public WidgetTypesBean() {
+	}
+
+	public WidgetTypesBean(long id, String name, long orgid) {
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public long getOrgid() {
+		return orgid;
+	}
+
+	public void setOrgid(long orgid) {
+		this.orgid = orgid;
+	}
 }
