@@ -10,6 +10,9 @@
         <dependent-module archiveName="infinityappsolutions-lib-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/infinityappsolutions.lib/infinityappsolutions.lib">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="JettyServer-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JettyServer/JettyServer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/WebDesigner/WEB-INF/classes"/>
         <property name="context-root" value="WebDesigner"/>
     </wb-module>
