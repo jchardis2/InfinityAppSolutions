@@ -7,23 +7,23 @@ package com.infinityappsolutions.server.webdesigner.beans;
  * @author jchardis
  * 
  */
-public class WidgetsBean extends UserWidgetTemplateBean {
-	private long widgetID;
+public class UserWidgetBean extends UserWidgetTemplateBean {
+	private long uwID;
 
-	public WidgetsBean(long widgetID, long bwtBeanID, long orgid, String name,
+	public UserWidgetBean(long uwID, long bwtBeanID, long orgid, String name,
 			long widgettypeid, Boolean iscontainer, String element,
 			String droppableTarget) {
 		super(bwtBeanID, orgid, name, widgettypeid, iscontainer, element,
 				droppableTarget);
-		this.widgetID = widgetID;
+		this.uwID = uwID;
 	}
 
-	public long getWidgetID() {
-		return widgetID;
+	public long getUwID() {
+		return uwID;
 	}
 
-	public void setWidgetID(long widgetID) {
-		this.widgetID = widgetID;
+	public void setUwID(long uwID) {
+		this.uwID = uwID;
 	}
 
 }

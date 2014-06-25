@@ -7,10 +7,10 @@ package com.infinityappsolutions.server.webdesigner.beans;
  * @author jchardis
  * 
  */
-public class WidgetTemplateBean extends BasicWidgetTemplateBean {
+public class UserWidgetTemplateBean extends BasicWidgetTemplateBean {
 	private long orgID;
 
-	public WidgetTemplateBean(long bwtBeanID, long orgid, String name,
+	public UserWidgetTemplateBean(long bwtBeanID, long orgid, String name,
 			long widgettypeid, Boolean iscontainer, String element,
 			String droppableTarget) {
 		super(bwtBeanID, name, widgettypeid, iscontainer, element,
