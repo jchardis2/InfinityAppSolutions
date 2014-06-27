@@ -1,2 +1,0 @@
-INSERT INTO `org_users` (`orgid`, `userid`, `createProjects`, `deleteProjects`, `editProjects`, `adduser`, `addadmin`, `editAllProjects`) VALUES (1, 1, 1, 1, 1, 1, 1, 1);
-INSERT INTO `org_users` (`orgid`, `userid`, `createProjects`, `deleteProjects`, `editProjects`, `adduser`, `addadmin`, `editAllProjects`) VALUES (2, 1, 1, 1, 1, 1, 1, 1);
